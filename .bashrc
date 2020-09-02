@@ -37,7 +37,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+    xterm-color|*-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -84,6 +84,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
@@ -113,21 +116,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
-# Mentor CAD setup
-export LM_LICENSE_FILE=11717@133.11.27.150
-export QUESTA_HOME=/opt/Mentor/questasim
-export PATH=/opt/Mentor/questasim/bin:${PATH}
-
-eval `opam config env`
-
-. /opt/Xilinx/Vivado/2017.4/settings64.sh
-
-export XILINXD_LICENSE_FILE=2101@recdev.cp.is.s.u-tokyo.ac.jp
-export MALLOC_CHECK_=0
-
-
 if type trash-put &> /dev/null
-	then
-		alias rm=trash-put
+then
+	alias rm=trash-put
 fi
+#export PATH="/usr/local/cuda/bin:$PATH"
+#export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
+#source /opt/ros/melodic/setup.bash
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

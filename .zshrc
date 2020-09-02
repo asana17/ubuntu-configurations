@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 #
 # zplug
 #
@@ -7,6 +14,9 @@ source ~/.zplug/init.zsh
 zplug 'zsh-users/zsh-autosuggestions'
 zplug 'zsh-users/zsh-completions'
 zplug 'zsh-users/zsh-syntax-highlighting', defer:3
+zplug 'romkatv/powerlevel10k', as:theme, depth:1
+zplug 'chrissicool/zsh-256color'
+zplug 'zsh-users/zsh-history-substring-search'
 #zplug 'mollifier/anyframe'
 
 if ! zplug check --verbose; then
@@ -16,12 +26,12 @@ if ! zplug check --verbose; then
   fi
 fi
 
-zplug load --verbose
+zplug load 
 # Set up the prompt
 
-autoload -Uz promptinit
-promptinit
-prompt suse
+#autoload -Uz promptinit
+#promptinit
+#prompt suse
 
 setopt histignorealldups sharehistory
 
@@ -91,6 +101,8 @@ setopt no_list_beep
 # = 以降も補完する（例：--option=value）
 setopt magic_equal_subst
 
+setopt nonomatch
+
 # バックグラウンド処理の状態変化をすぐに通知する
 setopt notify
 
@@ -114,6 +126,30 @@ setopt share_history
 
 # コマンド実行後は右プロンプトを消す
 setopt transient_rprompt
+
+#no match errorの解決
+setopt +o nomatch
+
+#vi mode
+#bindkey -v
+
+#vi mode which
+#zshプロンプトにモード表示####################################
+#function zle-line-init zle-keymap-select {
+#  case $KEYMAP in
+#    vicmd)
+#    PROMPT="%{$fg[red]%}[%{$reset_color%}%n/%{$fg_bold[red]%}NOR%{$reset_color%}%{$fg[red]%}]%#%{$reset_color%} "
+#    ;;
+#    main|viins)
+#    PROMPT="%{$fg[red]%}[%{$reset_color%}%n/%{$fg_bold[cyan]%}INS%{$reset_color%}%{$fg[red]%}]%#%{$reset_color%} "
+#    ;;
+#  esac
+#  zle reset-prompt
+#}
+#zle -N zle-line-init
+#zle -N zle-keymap-select
+
+#bindkey -M viins 'jj' vi-cmd-mode
 
 
 zstyle ':completion:*' completer _complete _match _approximate
@@ -166,3 +202,20 @@ zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
 alias ls='ls --color=auto'
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+XDG_CONFIG_HOME=.config
+
+#source /opt/ros/melodic/setup.zsh
+#source ~/tier4/workload-analysis/autoware.proj-0.3.0/install/setup.zsh
+
+#export PATH=$PATH:/usr/local/go/bin
+#export GOPATH=$HOME/go
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#for libuuid
+#export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+#export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
