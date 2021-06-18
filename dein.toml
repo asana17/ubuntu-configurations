@@ -1,0 +1,209 @@
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+hook_add = '''
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#show_splits = 0
+  let g:airline#extensions#tabline#show_tab_type = 0
+  let g:airline#extensions#tabline#show_close_button = 0
+  let g:airline_theme = 'luna'
+'''
+
+
+
+[[plugins]]
+repo = 'rhysd/accelerated-jk'
+hook_add = '''
+  nmap j <Plug>(accelerated_jk_gj)
+  nmap k <Plug>(accelerated_jk_gk)
+'''
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+merged = 0
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = ['fzf']
+
+[[plugins]]
+repo = 'godlygeek/tabular'
+
+#[[plugins]]
+#repo = 'plasticboy/vim-markdown'
+
+[[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+build = 'sh -c "cd app & yarn install"'
+hook_add = '''
+  let g:mkdp_auto_start = 0
+  let g:mkdp_refresh_slow = 1
+'''
+
+
+
+#--------------------------------------
+
+
+[[plugins]]
+repo = "prabirshrestha/async.vim"
+
+[[plugins]]
+repo = "prabirshrestha/asyncomplete.vim"
+hook_add = '''
+  inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <expr><cr> pumvisible() ? "\<C-y>" : "\<cr>"
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-buffer.vim'
+hook_add = '''
+  call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+      \ 'name': 'buffer',
+      \ 'priority': 5,
+      \ 'whitelist': ['*'],
+      \ 'completor': function('asyncomplete#sources#buffer#completor')
+      \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-file.vim'
+hook_source = '''
+  call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+      \ 'name': 'file',
+      \ 'priority': 3,
+      \ 'whitelist': ['*'],
+      \ 'completor': function('asyncomplete#sources#file#completor')
+      \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-necosyntax.vim'
+depends = ['neco-syntax']
+hook_source = '''
+  call asyncomplete#register_source(asyncomplete#sources#necosyntax#get_source_options({
+      \ 'name': 'necosyntax',
+      \ 'whitelist': ['*'],
+      \ 'priority': 7,
+      \ 'completor': function('asyncomplete#sources#necosyntax#completor')
+      \ }))
+'''
+
+
+[[plugins]]
+repo = 'Shougo/neco-syntax'
+lazy = 1
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-necovim.vim'
+on_ft = ['vim']
+depends = ['neco-vim']
+hook_source = '''
+  call asyncomplete#register_source(asyncomplete#sources#necovim#get_source_options({
+      \ 'name': 'necovim',
+      \ 'whitelist': ['vim'],
+      \ 'priority': 9,
+      \ 'completor': function('asyncomplete#sources#necovim#completor')
+      \ }))
+'''
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+lazy = 1
+
+#----------snippets-------------
+#Ctrl-kで展開、Ctrl-kで次の部分へ
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+depends = 'neosnippet-snippets'
+hook_add = '''
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k> <Plug>(neosnippet_expand_target)
+  smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  let g:neosnippet#snippets_directory = '~/.cache/dein/repos/github.com/honza/vim-snippets/snippets'
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'honza/vim-snippets'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
+depends = ['neosnippet.vim']
+hook_source = '''
+  call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+    \ 'name': 'neosnippet',
+    \ 'whitelist': ['*'],
+    \ 'priority': 9,
+    \ 'completor': function('asyncomplete#sources#neosnippet#completor')
+    \}))
+'''
+
+#----------vim lsp------------
+[[plugins]]
+repo = "prabirshrestha/asyncomplete-lsp.vim"
+
+[[plugins]]
+repo = "prabirshrestha/vim-lsp"
+hook_add = '''
+  let g:lsp_diagnostics_enabled = 1
+  let g:lsp_diagnostics_echo_cursor = 1
+  let g:asyncomplete_auto_popup = 1
+  let g:asyncomplete_auto_completeopt = 1
+  let g:asyncomplete_popup_delay = 200
+  let g:lsp_text_edit_enabled = 0
+'''
+
+[[plugins]]
+repo = "mattn/vim-lsp-settings"
+
+#--------------vim latex-------------------
+[[plugins]]
+repo = 'vim-latex/vim-latex'
+on_ft = 'tex'
+hook_add = '''
+  filetype plugin on
+  filetype indent on
+  set shellslash
+  set grepprg=grep\ -nH\ $*
+  let g:tex_flavor='latex'
+  let g:Imap_UsePlaceHolders = 1
+  let g:Imap_DeleteEmptyPlaceHolders = 1
+  let g:Imap_StickyPlaceHolders = 0
+  let g:Tex_DefaultTargetFormat = 'pdf'
+  let g:Tex_MultipleCompileFormats='dvi,pdf'
+  "let g:Tex_FormatDependency_pdf = 'pdf'
+  let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+  let g:Tex_CompileRule_pdf = 'ptex2pdf -u -l -ot "-synctex=1 -interaction=nonstopmode -file-line-error-style" $*'
+  "let g:Tex_CompileRule_pdf = 'lualatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+  let g:Tex_CompileRule_dvi = 'uplatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+  let g:Tex_BibtexFlavor = 'upbibtex'
+  let g:Tex_MakeIndexFlavor = 'upmendex $*.idx'
+  let g:Tex_UseEditorSettingInDVIViewer = 1
+  let g:Tex_ViewRule_pdf = 'xdg-open'
+  "let g:Tex_ViewRule_pdf = 'evince'
+  "let g:Tex_ViewRule_pdf = 'okular --unique'
+  "let g:Tex_ViewRule_pdf = 'zathura -x "vim --servername synctex -n --remote-silent +\%{line} \%{input}"'
+  "let g:Tex_ViewRule_pdf = 'qpdfview --unique'
+  "let g:Tex_ViewRule_pdf = 'texworks'
+  "let g:Tex_ViewRule_pdf = 'mupdf'
+  "let g:Tex_ViewRule_pdf = 'firefox -new-window'
+  "let g:Tex_ViewRule_pdf = 'chromium --new-window'
+'''
+
+
