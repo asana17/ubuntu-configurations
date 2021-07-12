@@ -169,14 +169,14 @@ endfunction
 "map <silent> [Tag]p :tabprevious<CR>
 " tp 前のタブ
 
-:command! Tree NERDTree
+":command! Tree NERDTree
 
 
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
-Plug 'Shougo/unite.vim'
+"Plug 'Shougo/unite.vim'
 
 " インデントに色を付けて見やすくする
 Plug 'Yggdroot/indentLine'
@@ -201,120 +201,118 @@ nmap k <Plug>(accelerated_jk_gk)
 
 
 
-Plug 'Shougo/neocomplete.vim'
+"Plug 'Shougo/neocomplete.vim'
 
 
 
-Plug 'justmao945/vim-clang'
+"Plug 'justmao945/vim-clang'
 " 'Shougo/neocomplete.vim' {{{
-let g:neocomplete#enable_at_startup = 1
+"let g:neocomplete#enable_at_startup = 1
 
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_overwrite_completefunc = 1
-let g:neocomplete#force_omni_input_patterns.c =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-let g:neocomplete#force_omni_input_patterns.cpp =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-      " Plugin key-mappings.
-      inoremap <expr><C-g>     neocomplete#undo_completion()
-      inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-      " Recommended key-mappings.
-      " <CR>: close popup and save indent.
-      inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-      function! s:my_cr_function()
-        return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-        " For no inserting <CR> key.
-        "return pumvisible() ? "\<C-y>" : "\<CR>"
-      endfunction
-      " <TAB>: completion.
-      inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-      " <C-h>, <BS>: close popup and delete backword char.
-      inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-      inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-      " Close popup by <Space>.
-      "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-      " AutoComplPop like behavior.
-      "let g:neocomplete#enable_auto_select = 1
-
-" }}}
+"if !exists('g:neocomplete#force_omni_input_patterns')
+"  let g:neocomplete#force_omni_input_patterns = {}
+"endif
+"let g:neocomplete#force_overwrite_completefunc = 1
+"let g:neocomplete#force_omni_input_patterns.c =
+"      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+"let g:neocomplete#force_omni_input_patterns.cpp =
+"      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+"      " Plugin key-mappings.
+"      inoremap <expr><C-g>     neocomplete#undo_completion()
+"      inoremap <expr><C-l>     neocomplete#complete_common_string()
 "
+"      " Recommended key-mappings.
+"      " <CR>: close popup and save indent.
+"      inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"      function! s:my_cr_function()
+"        return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+"        " For no inserting <CR> key.
+"        "return pumvisible() ? "\<C-y>" : "\<CR>"
+"      endfunction
+"      " <TAB>: completion.
+"      inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"      " <C-h>, <BS>: close popup and delete backword char.
+"      inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+"      inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"      " Close popup by <Space>.
+"      "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+"
+"      " AutoComplPop like behavior.
+"      "let g:neocomplete#enable_auto_select = 1
+"
+"" }}}
+
 " 'justmao945/vim-clang' {{{
 
 " disable auto completion for vim-clang
-let g:clang_auto = 0
+"let g:clang_auto = 0
 " default 'longest' can not work with neocomplete
-let g:clang_c_completeopt   = 'menuone'
-let g:clang_cpp_completeopt = 'menuone'
-
-function! s:get_latest_clang(search_path)
-    let l:filelist = split(globpath(a:search_path, 'clang-*'), '\n')
-    let l:clang_exec_list = []
-    for l:file in l:filelist
-        if l:file =~ '^.*clang-\d\.\d$'
-            call add(l:clang_exec_list, l:file)
-        endif
-    endfor
-    if len(l:clang_exec_list)
-        return reverse(l:clang_exec_list)[0]
-    else
-        return 'clang'
-    endif
-endfunction
-
-function! s:get_latest_clang_format(search_path)
-    let l:filelist = split(globpath(a:search_path, 'clang-format-*'), '\n')
-    let l:clang_exec_list = []
-    for l:file in l:filelist
-        if l:file =~ '^.*clang-format-\d\.\d$'
-            call add(l:clang_exec_list, l:file)
-        endif
-    endfor
-    if len(l:clang_exec_list)
-        return reverse(l:clang_exec_list)[0]
-    else
-        return 'clang-format'
-    endif
-endfunction
-
-let g:clang_exec = s:get_latest_clang('/usr/bin')
-let g:clang_format_exec = s:get_latest_clang_format('/usr/bin')
-
-let g:clang_c_options = '-std=c11'
-let g:clang_cpp_options = '-std=c++11'
-
-
+"let g:clang_c_completeopt   = 'menuone'
+"let g:clang_cpp_completeopt = 'menuone'
+"
+"function! s:get_latest_clang(search_path)
+"    let l:filelist = split(globpath(a:search_path, 'clang-*'), '\n')
+"    let l:clang_exec_list = []
+"    for l:file in l:filelist
+"        if l:file =~ '^.*clang-\d\.\d$'
+"            call add(l:clang_exec_list, l:file)
+"        endif
+"    endfor
+"    if len(l:clang_exec_list)
+"        return reverse(l:clang_exec_list)[0]
+"    else
+"        return 'clang'
+"    endif
+"endfunction
+"
+"function! s:get_latest_clang_format(search_path)
+"    let l:filelist = split(globpath(a:search_path, 'clang-format-*'), '\n')
+"    let l:clang_exec_list = []
+"    for l:file in l:filelist
+"        if l:file =~ '^.*clang-format-\d\.\d$'
+"            call add(l:clang_exec_list, l:file)
+"        endif
+"    endfor
+"    if len(l:clang_exec_list)
+"        return reverse(l:clang_exec_list)[0]
+"    else
+"        return 'clang-format'
+"    endif
+"endfunction
+"
+"let g:clang_exec = s:get_latest_clang('/usr/bin')
+"let g:clang_format_exec = s:get_latest_clang_format('/usr/bin')
+"
+"let g:clang_c_options = '-std=c11'
+"let g:clang_cpp_options = '-std=c++11'
 " }}}
 
 
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
+"Plug 'Shougo/neosnippet.vim'
+"Plug 'Shougo/neosnippet-snippets'
 
 
 " Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
 "imap <expr><TAB>
 " \ pumvisible() ? "\<C-n>" :
 " \ neosnippet#expandable_or_jumpable() ?
 " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
+"if has('conceal')
+"  set conceallevel=2 concealcursor=niv
+"endif
 
 "set snippet file dir
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/snippets/,~/.vim/snippets'
+"let g:neosnippet#enable_snipmate_compatibility = 1
+"let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/snippets/,~/.vim/snippets'
 
 
 call plug#end()
