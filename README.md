@@ -1,2 +1,2 @@
-# configure
-My configuration files for zsh, vim, and so on.
+# ubuntu-configurations
+My ubuntu configuration files for zsh, vim, and so on.
