@@ -36,21 +36,31 @@ depends = ['fzf']
 repo = 'godlygeek/tabular'
 
 #[[plugins]]
-#repo = 'plasticboy/vim-markdown'
+#repo = 'iamcco/markdown-preview.nvim'
+#on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+#build = 'sh -c "cd app & yarn install"'
+#hook_add = '''
+#  let g:mkdp_auto_start = 0
+#  let g:mkdp_refresh_slow = 1
+#'''
 
 [[plugins]]
-repo = 'iamcco/markdown-preview.nvim'
-on_ft = ['markdown', 'pandoc.markdown', 'rmd']
-build = 'sh -c "cd app & yarn install"'
+repo = 'plasticboy/vim-markdown'
+
+[[plugins]]
+repo = 'previm/previm'
 hook_add = '''
-  let g:mkdp_auto_start = 0
-  let g:mkdp_refresh_slow = 1
+    autocmd BufRead,BufNewFile *.md  set filetype=markdown
+    nnoremap <silent> <C-p> :PrevimOpen<CR>
+    let g:vim_markdown_folding_disabled=1
+    let g:previm_enable_realtime=1
 '''
 
+[[plugins]]
+repo = 'tyru/open-browser.vim'
 
 
 #--------------------------------------
-
 
 [[plugins]]
 repo = "prabirshrestha/async.vim"
@@ -118,6 +128,7 @@ hook_source = '''
 [[plugins]]
 repo = 'Shougo/neco-vim'
 lazy = 1
+
 
 #----------snippets-------------
 #Ctrl-kで展開、Ctrl-kで次の部分へ
