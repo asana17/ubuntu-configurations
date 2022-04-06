@@ -6,6 +6,8 @@
 3. zsh
 4. git
 5. neovim
+6. fzf
+7. trash-cli
 
 
 ## terminal
