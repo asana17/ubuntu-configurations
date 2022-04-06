@@ -55,4 +55,4 @@
 1. gnome shell extensions
   dash to panel
 2. gnome tweaks
-  change font to M1plus
+  change font to Mplus1
