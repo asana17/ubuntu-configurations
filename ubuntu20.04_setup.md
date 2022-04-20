@@ -21,11 +21,12 @@
   - remove check 'show the terminal title even if it's the only terminal'
 - Quake
   - Height percent : 90
+  - change height percent to 100% `gsettings set com.gexperts.Tilix.Settings quake-height-percent 100`
+
 - Profiles
   - Command: run a custom command 'zsh'
   - Color: scheme 'Monokai Dark'  
           add transparency
-
 #### others
 - add custom keyboard shortcuts to ubuntu
 - add extra space to terminal : edit `~/.config/gtk-3.0/gtk.css`
