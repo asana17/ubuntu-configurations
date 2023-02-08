@@ -42,8 +42,7 @@ colors
 #SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
 #RPROMPT="%{$fg[cyan]%}[%~]%{$reset_color%}"
 
-bindkey -e
-#bindkey -v '^?' backward-delete-char
+bindkey -v '^?' backward-delete-char
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 export CLICOLOR=true
@@ -130,28 +129,6 @@ setopt transient_rprompt
 #no match errorの解決
 setopt +o nomatch
 
-#vi mode
-#bindkey -v
-
-#vi mode which
-#zshプロンプトにモード表示####################################
-#function zle-line-init zle-keymap-select {
-#  case $KEYMAP in
-#    vicmd)
-#    PROMPT="%{$fg[red]%}[%{$reset_color%}%n/%{$fg_bold[red]%}NOR%{$reset_color%}%{$fg[red]%}]%#%{$reset_color%} "
-#    ;;
-#    main|viins)
-#    PROMPT="%{$fg[red]%}[%{$reset_color%}%n/%{$fg_bold[cyan]%}INS%{$reset_color%}%{$fg[red]%}]%#%{$reset_color%} "
-#    ;;
-#  esac
-#  zle reset-prompt
-#}
-#zle -N zle-line-init
-#zle -N zle-keymap-select
-
-#bindkey -M viins 'jj' vi-cmd-mode
-
-
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -188,6 +165,8 @@ if type trash-put &> /dev/null
 		alias rm=trash-put
 fi
 
+alias cat='/usr/local/bin/ccat'
+
 
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
@@ -208,17 +187,7 @@ alias ls='ls --color=auto'
 
 XDG_CONFIG_HOME=.config
 
-#source /opt/ros/melodic/setup.zsh
-#source ~/tier4/workload-analysis/autoware.proj-0.3.0/install/setup.zsh
-
-export PATH=$PATH:/usr/local/go/bin
-export GOPATH=$HOME/go
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-#for libuuid
-#export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-#export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 
 function zle-line-init zle-keymap-select {
     VIM_NORMAL="%K{208}%F{black}⮀%k%f%K{208}%F{white} % NORMAL %k%f%K{black}%F{208}⮀%k%f"
@@ -231,3 +200,4 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 
 bindkey  -M viins 'jj' vi-cmd-mode
+export PATH="$PATH":~/.local/bin
