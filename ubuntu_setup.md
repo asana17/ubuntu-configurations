@@ -77,3 +77,7 @@ sudo chmod +x /usr/local/bin/ccat
 2. gnome tweaks
   change font to Mplus1
   change monospace font to Cica
+
+## time
+fix misalignment of windows time
+`timedatectl set-local-rtc 1`
