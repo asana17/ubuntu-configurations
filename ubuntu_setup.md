@@ -1,14 +1,14 @@
-# ubuntu20.04 setup
+# ubuntu setup
 
 ## apps
 1. google chrome
-2. tilix
-3. zsh
-4. git
-5. neovim
-6. fzf
-7. trash-cli
-
+1. tilix (apt)
+1. zsh (apt)
+1. git
+1. neovim (from github)
+1. fzf
+1. trash-cli (apt)
+1. nemo
 
 ## terminal
 ### tilix
@@ -24,7 +24,8 @@
   - change height percent to 100% `gsettings set com.gexperts.Tilix.Settings quake-height-percent 100`
 
 - Profiles
-  - Command: run a custom command 'zsh'
+  - Command: run as a login shell  
+          run a custom command 'zsh'
   - Color: scheme 'Monokai Dark'  
           add transparency
 #### others
@@ -47,13 +48,24 @@
 - Download `.zshrc` from my github repo
 - install `zplug` from github
 
-#### neovim
+### neovim
 #### install
+- `sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim`
 - install `dein` from github
 - download `init.vim` \& `dein.toml` from my github repo
+
+#### nemo
+#### setting
+```
+xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
+gsettings set org.gnome.desktop.background show-desktop-icons false
+gsettings set org.nemo.desktop show-desktop-icons true
+```
+
 
 ## UI
 1. gnome shell extensions
   dash to panel
 2. gnome tweaks
   change font to Mplus1
+  change monospace font to Cica
