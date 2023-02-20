@@ -7,10 +7,6 @@ repo = 'vim-airline/vim-airline'
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
 hook_add = '''
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#show_splits = 0
-  let g:airline#extensions#tabline#show_tab_type = 0
-  let g:airline#extensions#tabline#show_close_button = 0
   let g:airline_theme = 'luna'
 '''
 
@@ -34,15 +30,6 @@ depends = ['fzf']
 
 [[plugins]]
 repo = 'godlygeek/tabular'
-
-#[[plugins]]
-#repo = 'iamcco/markdown-preview.nvim'
-#on_ft = ['markdown', 'pandoc.markdown', 'rmd']
-#build = 'sh -c "cd app & yarn install"'
-#hook_add = '''
-#  let g:mkdp_auto_start = 0
-#  let g:mkdp_refresh_slow = 1
-#'''
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
