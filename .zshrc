@@ -1,14 +1,9 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-#
 # zplug
-#
-
 source ~/.zplug/init.zsh
 
 zplug 'zsh-users/zsh-autosuggestions'
@@ -17,7 +12,6 @@ zplug 'zsh-users/zsh-syntax-highlighting', defer:3
 zplug 'romkatv/powerlevel10k', as:theme, depth:1
 zplug 'chrissicool/zsh-256color'
 zplug 'zsh-users/zsh-history-substring-search'
-#zplug 'mollifier/anyframe'
 
 if ! zplug check --verbose; then
   printf 'Install? [y/N]: '
@@ -26,21 +20,12 @@ if ! zplug check --verbose; then
   fi
 fi
 
-zplug load 
-# Set up the prompt
-
-#autoload -Uz promptinit
-#promptinit
-#prompt suse
+zplug load
 
 setopt histignorealldups sharehistory
 
 autoload -Uz colors
 colors
-#PROMPT="%{$fg[green]%}%m%(!.#.$) %{$reset_color%}"
-#PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
-#SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
-#RPROMPT="%{$fg[cyan]%}[%~]%{$reset_color%}"
 
 bindkey -v '^?' backward-delete-char
 
@@ -136,27 +121,9 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*:default' menu select=2
-#zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
 zstyle ':completion:*:options' description 'yes'
-#zstyle ':completion:*' auto-description 'specify: %d'
-#zstyle ':completion:*' completer _expand _complete _correct _approximate
-#zstyle ':completion:*' format 'Completing %d'
-#zstyle ':completion:*' group-name ''
-#zstyle ':completion:*' menu select=2
 eval "$(dircolors -b)"
-#zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-#zstyle ':completion:*' list-colors ''
-#zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
-#zstyle ':completion:*' menu select=long
-#zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-#zstyle ':completion:*' use-compctl false
-#zstyle ':completion:*' verbose true
-
-#zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-#zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-
-#PS1="%{$fg[cyan]%}${USER}@${HOST%%.*}:%~%(!.#.$)${reset_color} "
 
 function chpwd() {ls -v -F --color=auto }
 
@@ -189,15 +156,9 @@ XDG_CONFIG_HOME=.config
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-function zle-line-init zle-keymap-select {
-    VIM_NORMAL="%K{208}%F{black}⮀%k%f%K{208}%F{white} % NORMAL %k%f%K{black}%F{208}⮀%k%f"
-    VIM_INSERT="%K{075}%F{black}⮀%k%f%K{075}%F{white} % INSERT %k%f%K{black}%F{075}⮀%k%f"
-    RPS1="${${KEYMAP/vicmd/$VIM_NORMAL}/(main|viins)/$VIM_INSERT}"
-    RPS2=$RPS1
-    zle reset-prompt
-}
 zle -N zle-line-init
 zle -N zle-keymap-select
 
 bindkey  -M viins 'jj' vi-cmd-mode
+export PATH="$PATH":~/.cargo/env
 export PATH="$PATH":~/.local/bin

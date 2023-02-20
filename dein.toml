@@ -10,7 +10,10 @@ hook_add = '''
   let g:airline_theme = 'luna'
 '''
 
-
+[[plugins]]
+repo = "airblade/vim-gitgutter"
+[[plugins]]
+repo = "tpope/vim-fugitive"
 
 [[plugins]]
 repo = 'rhysd/accelerated-jk'
@@ -30,6 +33,15 @@ depends = ['fzf']
 
 [[plugins]]
 repo = 'godlygeek/tabular'
+
+#[[plugins]]
+#repo = 'iamcco/markdown-preview.nvim'
+#on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+#build = 'sh -c "cd app & yarn install"'
+#hook_add = '''
+#  let g:mkdp_auto_start = 0
+#  let g:mkdp_refresh_slow = 1
+#'''
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
