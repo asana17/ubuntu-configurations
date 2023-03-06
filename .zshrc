@@ -29,12 +29,12 @@ colors
 
 bindkey -v '^?' backward-delete-char
 
-# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 export CLICOLOR=true
 export LSCOLORS='exfxcxdxbxGxDxabagacad'
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
 
 
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
@@ -125,14 +125,10 @@ zstyle ':completion:*:options' description 'yes'
 eval "$(dircolors -b)"
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
 
-function chpwd() {ls -v -F --color=auto }
-
 if type trash-put &> /dev/null
-	then
-		alias rm=trash-put
+  then
+    alias rm=trash-put
 fi
-
-alias cat='/usr/local/bin/ccat'
 
 
 fancy-ctrl-z () {
@@ -149,6 +145,8 @@ bindkey '^Z' fancy-ctrl-z
 
 alias ls='ls --color=auto'
 
+alias cat='bat'
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
@@ -162,3 +160,11 @@ zle -N zle-keymap-select
 bindkey  -M viins 'jj' vi-cmd-mode
 export PATH="$PATH":~/.cargo/env
 export PATH="$PATH":~/.local/bin
+. "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export FZF_CTRL_T_COMMAND='rg --files --hidden --glob "!.git/*"'
+export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'

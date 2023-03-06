@@ -1,46 +1,49 @@
-if &compatible
-  set nocompatible               " Be iMproved
-endif
+" Ward off unexpected things that your distro might have made, as
+" well as sanely reset options when re-sourcing .vimrc
+set nocompatible
 
-augroup MyAutoCmd
-  autocmd!
-augroup END
+" Set Dein base path (required)
+let s:dein_base = '/home/kaightasa/.local/share/dein'
 
-let s:dein_dir = expand('~/.cache/dein')
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+" Set Dein source path (required)
+let s:dein_src = '/home/kaightasa/.local/share/dein/repos/github.com/Shougo/dein.vim'
 
-" Required:
-set runtimepath+=/home/asana/.cache/dein/repos/github.com/Shougo/dein.vim
+" Set Dein runtime path (required)
+execute 'set runtimepath+=' . s:dein_src
 
-" Required:
-if dein#load_state('/home/asana/.cache/dein')
-  call dein#begin('/home/asana/.cache/dein')
+" Call Dein initialization (required)
+if dein#load_state(s:dein_base)
+  call dein#begin(s:dein_base)
 
-  " Let dein manage dein
-  " Required:
-  call dein#add('/home/asana/.cache/dein/repos/github.com/Shougo/dein.vim')
-
+  call dein#add(s:dein_src)
   let g:rc_dir = expand('~/.config/nvim/dein/toml')
   let s:toml = g:rc_dir . '/dein.toml'
-	"let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
   call dein#load_toml(s:toml, {'lazy': 0})
-  "call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
-  " Add or remove your plugins here like this:
+  " Your plugins go here:
   "call dein#add('Shougo/neosnippet.vim')
+  "call dein#add('Shougo/neosnippet-snippets')
 
-  " Required:
+  " Finish Dein initialization (required)
   call dein#end()
   call dein#save_state()
 endif
 
-" Required:
-filetype plugin indent on
-syntax enable
+" Attempt to determine the type of a file based on its name and possibly its
+" contents. Use this to allow intelligent auto-indenting for each filetype,
+" and for plugins that are filetype specific.
+if has('filetype')
+  filetype indent plugin on
+endif
 
-" If you want to install not installed plugins on startup.
+" Enable syntax highlighting
+if has('syntax')
+  syntax on
+endif
+
+" Uncomment if you want to install not-installed plugins on startup.
 if dein#check_install()
-  call dein#install()
+ call dein#install()
 endif
 
 set number
@@ -57,25 +60,18 @@ set showmatch matchtime=1
 set cmdheight=2
 set display=lastline
 set list
-set tabstop=2
 set smartindent
 set noswapfile
 set title
 set mouse=a
 set whichwrap=b,s,h,l,<,>,[,],~
 inoremap <silent> jj <ESC>
-"set termkey=<A-w>
-"tnoremap jj <A-w><S-n>
-
-augroup rememberEditPosition
-  autocmd BufReadPost *
-        \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-        \   exe "normal! g'\"" |
-        \ endif
-augroup end
-
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 set shell=/usr/bin/zsh
 
 set clipboard+=unnamedplus
+
+" terminal
+tnoremap <Esc> <C-\><c-n>
+command! -nargs=* T split | wincmd j | resize 20 | terminal <args>
+autocmd TermOpen * startinsert

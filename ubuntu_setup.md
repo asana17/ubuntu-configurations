@@ -5,11 +5,13 @@
 1. tilix (apt)
 1. zsh (apt)
 1. git
+1. github-cli
 1. neovim (from github)
 1. fzf
+1. bat
+1. ripgrep
 1. trash-cli (apt)
 1. nemo
-1. ccat
 
 ## terminal
 ### tilix
@@ -62,14 +64,16 @@ xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 gsettings set org.gnome.desktop.background show-desktop-icons false
 gsettings set org.nemo.desktop show-desktop-icons true
 ```
-#### ccat
+### bat
 ```
-wget https://github.com/jingweno/ccat/releases/download/v1.1.0/linux-amd64-1.1.0.tar.gz
-tar xfz linux-amd64-1.1.0.tar.gz
-sudo cp linux-amd64-1.1.0/ccat /usr/local/bin
-sudo chmod +x /usr/local/bin/ccat
+sudo apt install bat
+ln -s /usr/bin/batcat ~/.local/bin/bat
 ```
 
+### ripgrep
+```
+sudo apt install ripgrep
+```
 
 ## UI
 1. gnome shell extensions

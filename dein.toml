@@ -26,6 +26,18 @@ hook_add = '''
 repo = 'junegunn/fzf'
 build = './install --all'
 merged = 0
+# \g invokes rg fzf
+hook_add = '''
+  function! s:find_rip_grep() abort
+      call fzf#vim#grep(
+                  \   'rg --ignore-file ~/.ignore --column --line-number --no-heading --hidden --smart-case .+',
+                  \   1,
+                  \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%', '?'),
+                  \   0,
+                  \ )
+  endfunction
+  nnoremap <silent> <Leader>g :<C-u>silent call <SID>find_rip_grep()<CR>
+'''
 
 [[plugins]]
 repo = 'junegunn/fzf.vim'
@@ -33,15 +45,6 @@ depends = ['fzf']
 
 [[plugins]]
 repo = 'godlygeek/tabular'
-
-#[[plugins]]
-#repo = 'iamcco/markdown-preview.nvim'
-#on_ft = ['markdown', 'pandoc.markdown', 'rmd']
-#build = 'sh -c "cd app & yarn install"'
-#hook_add = '''
-#  let g:mkdp_auto_start = 0
-#  let g:mkdp_refresh_slow = 1
-#'''
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
@@ -140,7 +143,7 @@ hook_add = '''
   smap <C-k> <Plug>(neosnippet_expand_or_jump)
   xmap <C-k> <Plug>(neosnippet_expand_target)
   smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-  let g:neosnippet#snippets_directory = '~/.cache/dein/repos/github.com/honza/vim-snippets/snippets'
+  let g:neosnippet#snippets_directory = '~/.local/share/dein/repos/github.com/honza/vim-snippets/snippets'
   if has('conceal')
     set conceallevel=2 concealcursor=niv
   endif
@@ -177,6 +180,7 @@ hook_add = '''
   let g:asyncomplete_auto_completeopt = 1
   let g:asyncomplete_popup_delay = 200
   let g:lsp_text_edit_enabled = 0
+  let g:lsp_signs_enabled = 1
 '''
 
 [[plugins]]
