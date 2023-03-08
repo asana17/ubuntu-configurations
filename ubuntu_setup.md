@@ -56,6 +56,8 @@
 - `sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim`
 - install `dein` from github
 - download `init.vim` \& `dein.toml` from my github repo
+#### lsp
+you need g++-12 for LSP in ubuntu22.04
 
 #### nemo
 #### setting
