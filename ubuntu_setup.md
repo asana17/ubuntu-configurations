@@ -1,12 +1,12 @@
 # ubuntu setup
 
 ## apps
-1. google chrome
+1. Google Chrome
 1. tilix (apt)
 1. zsh (apt)
 1. git
 1. github-cli
-1. neovim (from github)
+1. neovim (from GitHub)
 1. fzf
 1. bat
 1. ripgrep
@@ -48,18 +48,21 @@
 #### install
 - run `$chsh -s $(which zsh)` and change login shell to zsh
 #### settings
-- Download `.zshrc` from my github repo
-- install `zplug` from github
+- Download `.zshrc` from this repo
+- install `zplug` from GitHub
 
 ### neovim
 #### install
 - `sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim`
-- install `dein` from github
-- download `init.vim` \& `dein.toml` from my github repo
+- install `dein` from GitHub
+- download `init.vim` \& `dein.toml` from this repo
 #### lsp
 you need `g++-12` for LSP in ubuntu22.04
+#### tagbar
+1. You need to install ctags [description](https://docs.ctags.io/en/latest/autotools.html#gnu-linux-distributions)
+2. copy .ctags from this repo
 
-#### nemo
+### nemo
 #### setting
 ```
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
@@ -80,7 +83,7 @@ sudo apt install ripgrep
 ## UI
 1. gnome shell extensions
   dash to panel
-2. gnome tweaks
+2. Gnome tweaks
   change font to Mplus1
   change monospace font to Cica
 

@@ -12,8 +12,11 @@ hook_add = '''
 
 [[plugins]]
 repo = "airblade/vim-gitgutter"
+
 [[plugins]]
 repo = "tpope/vim-fugitive"
+
+
 
 [[plugins]]
 repo = 'rhysd/accelerated-jk'
@@ -26,7 +29,6 @@ hook_add = '''
 repo = 'junegunn/fzf'
 build = './install --all'
 merged = 0
-# \g invokes rg fzf
 hook_add = '''
   function! s:find_rip_grep() abort
       call fzf#vim#grep(
@@ -178,13 +180,121 @@ hook_add = '''
   let g:lsp_diagnostics_echo_cursor = 1
   let g:asyncomplete_auto_popup = 1
   let g:asyncomplete_auto_completeopt = 1
-  let g:asyncomplete_popup_delay = 200
+  let g:asyncomplete_popup_delay = 500
   let g:lsp_text_edit_enabled = 0
   let g:lsp_signs_enabled = 1
 '''
 
 [[plugins]]
 repo = "mattn/vim-lsp-settings"
+
+[[plugins]]
+repo = "rhysd/vim-grammarous"
+hook_add = '''
+  let g:grammarous#enable_spell_check=1
+  let g:grammarous#default_comments_only_filetypes = {
+            \ '*' : 1, 'help' : 0, 'markdown' : 0,
+            \ }
+  let g:grammarous#jar_url = 'https://www.languagetool.org/download/LanguageTool-5.9.zip'
+
+  let g:grammarous#hooks = {}
+  function! g:grammarous#hooks.on_check(errs) abort
+      nmap <buffer> n <Plug>(grammarous-move-to-next-error)
+      nmap <buffer> p <Plug>(grammarous-move-to-previous-error)
+      nmap <buffer> f <Plug>(grammarous-fixit)
+      nmap <buffer> r <Plug>(grammarous-remove-error)
+  endfunction
+
+  function! g:grammarous#hooks.on_reset(errs) abort
+      nunmap <buffer> n
+      nunmap <buffer> p
+      nunmap <buffer> f
+      nunmap <buffer> r
+  endfunction
+'''
+# to fix bug temporaliy, need to delete vim-grammarous/autoload/grammarous.vim L698: "call grammarous#info_win#close()
+
+
+
+[[plugins]]
+repo = "vim-scripts/a.vim"
+
+[[plugins]]
+repo = "preservim/tagbar"
+hook_add = '''
+  nmap <F8> : TagbarToggle<CR>
+  let g:tagbar_type_css = {
+  \ 'ctagstype' : 'Css',
+    \ 'kinds'     : [
+        \ 'c:classes',
+        \ 's:selectors',
+        \ 'i:identities'
+    \ ]
+  \ }
+  let g:tagbar_type_markdown = {
+    \ 'ctagstype'	: 'markdown',
+    \ 'kinds'		: [
+      \ 'c:chapter:0:1',
+      \ 's:section:0:1',
+      \ 'S:subsection:0:1',
+      \ 't:subsubsection:0:1',
+      \ 'T:l4subsection:0:1',
+      \ 'u:l5subsection:0:1',
+    \ ],
+    \ 'sro'			: '""',
+    \ 'kind2scope'	: {
+      \ 'c' : 'chapter',
+      \ 's' : 'section',
+      \ 'S' : 'subsection',
+      \ 't' : 'subsubsection',
+      \ 'T' : 'l4subsection',
+    \ },
+    \ 'scope2kind'	: {
+      \ 'chapter' : 'c',
+      \ 'section' : 's',
+      \ 'subsection' : 'S',
+      \ 'subsubsection' : 't',
+      \ 'l4subsection' : 'T',
+    \ },
+  \ }
+  let g:tagbar_type_rust = {
+    \ 'ctagstype' : 'rust',
+    \ 'kinds' : [
+        \'T:types,type definitions',
+        \'f:functions,function definitions',
+        \'g:enum,enumeration names',
+        \'s:structure names',
+        \'m:modules,module names',
+        \'c:consts,static constants',
+        \'t:traits',
+        \'i:impls,trait implementations',
+    \]
+  \}
+  let g:tagbar_type_yaml = {
+    \ 'ctagstype' : 'yaml',
+    \ 'kinds' : [
+        \ 'a:anchors',
+        \ 's:section',
+        \ 'e:entry'
+    \ ],
+  \ 'sro' : '.',
+    \ 'scope2kind': {
+      \ 'section': 's',
+      \ 'entry': 'e'
+    \ },
+    \ 'kind2scope': {
+      \ 's': 'section',
+      \ 'e': 'entry'
+    \ },
+    \ 'sort' : 0
+    \ }
+'''
+
+[[plugins]]
+repo = "rust-lang/rust.vim"
+hook_add = '''
+  let g:rustfmt_autosave = 1
+'''
 
 #--------------vim latex-------------------
 [[plugins]]

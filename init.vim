@@ -65,6 +65,8 @@ set noswapfile
 set title
 set mouse=a
 set whichwrap=b,s,h,l,<,>,[,],~
+set formatoptions-=cro
+autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 inoremap <silent> jj <ESC>
 
 set shell=/usr/bin/zsh
@@ -75,3 +77,9 @@ set clipboard+=unnamedplus
 tnoremap <Esc> <C-\><c-n>
 command! -nargs=* T split | wincmd j | resize 20 | terminal <args>
 autocmd TermOpen * startinsert
+
+" back to last cursor
+augroup vimrcEx
+  au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
+  \ exe "normal g`\"" | endif
+augroup END
