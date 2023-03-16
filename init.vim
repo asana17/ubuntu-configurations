@@ -75,7 +75,7 @@ set clipboard+=unnamedplus
 
 " terminal
 tnoremap <Esc> <C-\><c-n>
-command! -nargs=* T split | wincmd j | resize 20 | terminal <args>
+command! -nargs=* T split | wincmd j | resize 15 | terminal <args>
 autocmd TermOpen * startinsert
 
 " back to last cursor
@@ -92,10 +92,11 @@ endif
 " Theme
 colorscheme mycolor
 " for vim markdown
-hi mkdHeading guifg=#ffdad8
+hi mkdHeading guifg=#e09eff
 hi link mkdNonListItemBlock Normal
 hi mkdLink cterm=underline gui=underline guifg=#1fc8c7
-set pumblend=10
+hi mkdListItemLine ctermfg=0 guifg=#a9bcff
+set pumblend=20
 
 " persisitend_undo
 if has('persistent_undo')

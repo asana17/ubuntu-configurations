@@ -41,7 +41,7 @@ hi StatusLineNC guifg=#999999 ctermfg=246 guibg=#777777 ctermbg=238 gui=NONE cte
 hi TabLine guifg=#999999 ctermfg=246 guibg=#777777 ctermbg=238 gui=NONE cterm=NONE
 hi TabLineFill guifg=NONE ctermfg=NONE guibg=#777777 ctermbg=238 gui=NONE cterm=NONE
 hi TabLineSel guifg=#c9d05c ctermfg=185 guibg=NONE ctermbg=NONE gui=Bold cterm=Bold
-hi Title guifg=#b3deef ctermfg=153 guibg=NONE ctermbg=NONE gui=Bold cterm=Bold
+hi Title guifg=#c0abff ctermfg=153 guibg=NONE ctermbg=NONE gui=Bold cterm=Bold
 hi Visual guifg=NONE ctermfg=NONE guibg=#293b44 ctermbg=237 gui=Bold cterm=Bold
 hi VisualNOS guifg=NONE ctermfg=NONE guibg=#293b44 ctermbg=237 gui=Bold cterm=Bold
 hi WarningMsg guifg=#f43753 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
@@ -55,12 +55,13 @@ hi Number guifg=#ffc24b ctermfg=215 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Float guifg=#ffc24b ctermfg=215 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Identifier guifg=#b3deef ctermfg=153 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Function guifg=#b3deef ctermfg=153 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi Statement guifg=#ff69f1 ctermfg=81 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+"hi Statement guifg=#ff69f1 ctermfg=81 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi Statement guifg=#16eff6 ctermfg=50 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Conditional guifg=#c9d05c ctermfg=185 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Operator guifg=#cccccc ctermfg=253 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Exception guifg=#f43753 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi PreProc guifg=#3d9ff5 ctermfg=26 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi Type guifg=#16eff6 ctermfg=50 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi Type guifg=#a9bcff ctermfg=98 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Special guifg=#b894ff ctermfg=171 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Underlined guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=underline cterm=underline
 hi Error guifg=#eeeeee ctermfg=255 guibg=#cd617a ctermbg=125 gui=NONE cterm=NONE

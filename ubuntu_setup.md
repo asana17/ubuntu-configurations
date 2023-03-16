@@ -59,7 +59,7 @@
 #### undo setting
 - make directory `~/.config/nvim/undo`
 ### theme
-- copy `tender.vim` to `~/.config/nvim/colors`
+- copy `mycolor.vim` to `~/.config/nvim/colors`
 
 #### lsp
 you need `g++-12` for LSP in ubuntu22.04
