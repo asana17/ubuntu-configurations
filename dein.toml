@@ -50,7 +50,9 @@ depends = ['fzf']
 repo = 'godlygeek/tabular'
 
 [[plugins]]
-repo = 'plasticboy/vim-markdown'
+repo = 'preservim/vim-markdown'
+hook_add = '''
+'''
 
 [[plugins]]
 repo = 'previm/previm'

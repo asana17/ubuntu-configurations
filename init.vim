@@ -66,7 +66,6 @@ set title
 set mouse=a
 set whichwrap=b,s,h,l,<,>,[,],~
 set formatoptions-=cro
-set wildmenu
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 inoremap <silent> jj <ESC>
 
@@ -91,15 +90,11 @@ if (has("termguicolors"))
 endif
 
 " Theme
-colorscheme tender
-hi Normal ctermbg=NONE ctermfg=252 guibg=#NONE guifg=#c6c8d1
-hi NonText ctermbg=NONE guibg=#NONE
-hi LineNr ctermbg=NONE guibg=#NONE
-hi Folded ctermbg=NONE guibg=#NONE
-hi EndOfBuffer ctermbg=NONE guibg=#NONE
-hi VertSplit ctermbg=NONE guibg=#NONE
-hi NVimInternalError ctermfg=0 guifg=White
-hi Error ctermfg=255 ctermbg=125 guifg=#eeeeee guibg=#cd617e
+colorscheme mycolor
+" for vim markdown
+hi mkdHeading guifg=#ffdad8
+hi link mkdNonListItemBlock Normal
+hi mkdLink cterm=underline gui=underline guifg=#1fc8c7
 set pumblend=10
 
 " persisitend_undo
@@ -108,3 +103,42 @@ if has('persistent_undo')
   exe 'set undodir=' .. undo_path
   set undofile
 endif
+
+" カーソル下のhighlight情報を表示する {{{
+function! s:get_syn_id(transparent)
+  let synid = synID(line("."), col("."), 1)
+  if a:transparent
+    return synIDtrans(synid)
+  else
+    return synid
+  endif
+endfunction
+function! s:get_syn_attr(synid)
+  let name = synIDattr(a:synid, "name")
+  let ctermfg = synIDattr(a:synid, "fg", "cterm")
+  let ctermbg = synIDattr(a:synid, "bg", "cterm")
+  let guifg = synIDattr(a:synid, "fg", "gui")
+  let guibg = synIDattr(a:synid, "bg", "gui")
+  return {
+        \ "name": name,
+        \ "ctermfg": ctermfg,
+        \ "ctermbg": ctermbg,
+        \ "guifg": guifg,
+        \ "guibg": guibg}
+endfunction
+function! s:get_syn_info()
+  let baseSyn = s:get_syn_attr(s:get_syn_id(0))
+  echo "name: " . baseSyn.name .
+        \ " ctermfg: " . baseSyn.ctermfg .
+        \ " ctermbg: " . baseSyn.ctermbg .
+        \ " guifg: " . baseSyn.guifg .
+        \ " guibg: " . baseSyn.guibg
+  let linkedSyn = s:get_syn_attr(s:get_syn_id(1))
+  echo "links to"
+  echo "name: " . linkedSyn.name .
+        \ " ctermfg: " . linkedSyn.ctermfg .
+        \ " ctermbg: " . linkedSyn.ctermbg .
+        \ " guifg: " . linkedSyn.guifg .
+        \ " guibg: " . linkedSyn.guibg
+endfunction
+command! SyntaxInfo call s:get_syn_info()

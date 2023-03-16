@@ -1,32 +1,11 @@
-" ===============================================================
-" tender
-" A dark and fresh color scheme for vim
-" URL: https://github/com/jacoborus/tender.vim
-" Author: Jacobo Tabernero http://jacoborus.codes
-" License: MIT
-" Last Change: 2020/04/24 16:58
-" ===============================================================
-
 set background=dark
 hi clear
 if exists("syntax_on")
   syntax reset
 endif
-let g:colors_name="tender"
+let g:colors_name="mycolor"
 
 
-let Italic = ""
-if exists('g:tender_italic')
-  let Italic = "italic"
-endif
-let g:tender_italic = get(g:, 'tender_italic', 0)
-
-let Bold = ""
-if exists('g:tender_bold')
-  let Bold = "bold"
-endif
-
-let g:tender_bold = get(g:, 'tender_bold', 0)
 hi ColorColumn guifg=NONE ctermfg=NONE guibg=#323232 ctermbg=236 gui=NONE cterm=NONE
 hi CursorColumn guifg=NONE ctermfg=NONE guibg=#323232 ctermbg=236 gui=NONE cterm=NONE
 hi CursorLine guifg=NONE ctermfg=NONE guibg=#323232 ctermbg=236 gui=NONE cterm=NONE
@@ -36,16 +15,16 @@ hi DiffAdd guifg=NONE ctermfg=NONE guibg=#464632 ctermbg=238 gui=NONE cterm=NONE
 hi DiffChange guifg=NONE ctermfg=NONE guibg=#335261 ctermbg=239 gui=NONE cterm=NONE
 hi DiffDelete guifg=#f43753 ctermfg=203 guibg=#79313c ctermbg=237 gui=NONE cterm=NONE
 hi DiffText guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=reverse cterm=reverse
-hi ErrorMsg guifg=#f43753 ctermfg=203 guibg=NONE ctermbg=NONE gui=reverse cterm=reverse
+hi ErrorMsg guifg=#eeeeee ctermfg=255 guibg=#cd617e ctermbg=125 gui=NONE cterm=NONE
 hi VertSplit guifg=#282828 ctermfg=235 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
-hi Folded guifg=#888888 ctermfg=242 guibg=#202020 ctermbg=234 gui=NONE cterm=NONE
+hi Folded guifg=#888888 ctermfg=242 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi FoldColumn guifg=#888888 ctermfg=242 guibg=#202020 ctermbg=234 gui=NONE cterm=NONE
 hi SignColumn guifg=#999999 ctermfg=246 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
 hi IncSearch guifg=#ffffff ctermfg=15 guibg=#000000 ctermbg=0 gui=Bold,reverse cterm=Bold,reverse
 hi LineNr guifg=#777777 ctermfg=238 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi MatchParen guifg=#f43753 ctermfg=203 guibg=NONE ctermbg=NONE gui=Bold cterm=Bold
+hi MatchParen guifg=#ff8f2c ctermfg=166 guibg=NONE ctermbg=NONE gui=Bold cterm=Bold
 hi NonText guifg=#777777 ctermfg=238 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi Normal guifg=#eeeeee ctermfg=255 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
+hi Normal guifg=#eeeeee ctermfg=255 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi PMenu guifg=#dadada ctermfg=253 guibg=#335261 ctermbg=239 gui=NONE cterm=NONE
 hi PMenuSel guifg=#335261 ctermfg=239 guibg=#c9d05c ctermbg=185 gui=NONE cterm=NONE
 hi PmenuSbar guifg=#335261 ctermfg=239 guibg=#335261 ctermbg=239 gui=NONE cterm=NONE
@@ -76,15 +55,15 @@ hi Number guifg=#ffc24b ctermfg=215 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Float guifg=#ffc24b ctermfg=215 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Identifier guifg=#b3deef ctermfg=153 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Function guifg=#b3deef ctermfg=153 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi Statement guifg=#b3deef ctermfg=153 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi Statement guifg=#ff69f1 ctermfg=81 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Conditional guifg=#c9d05c ctermfg=185 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi Operator guifg=#f43753 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi Operator guifg=#cccccc ctermfg=253 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Exception guifg=#f43753 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi PreProc guifg=#c9d05c ctermfg=185 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi Type guifg=#73cef4 ctermfg=81 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi Special guifg=#73cef4 ctermfg=81 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi PreProc guifg=#3d9ff5 ctermfg=26 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi Type guifg=#16eff6 ctermfg=50 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi Special guifg=#b894ff ctermfg=171 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi Underlined guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=underline cterm=underline
-hi Error guifg=#eeeeee ctermfg=255 guibg=#f43753 ctermbg=203 gui=NONE cterm=NONE
+hi Error guifg=#eeeeee ctermfg=255 guibg=#cd617a ctermbg=125 gui=NONE cterm=NONE
 hi Todo guifg=#f43753 ctermfg=203 guibg=NONE ctermbg=NONE gui=Bold cterm=Bold
 hi CocErrorSign guifg=#f43753 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi CocWarningSign guifg=#d3b987 ctermfg=180 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
@@ -255,7 +234,7 @@ hi cssVisualVal guifg=#eeeeee ctermfg=255 guibg=NONE ctermbg=NONE gui=NONE cterm
 hi stylusImport guifg=#ffc24b ctermfg=215 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi vimCommentString guifg=#715b2f ctermfg=58 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi vimCommentTitle guifg=#44778d ctermfg=66 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
-hi vimError guifg=#eeeeee ctermfg=255 guibg=#f43753 ctermbg=203 gui=NONE cterm=NONE
+hi vimError guifg=#eeeeee ctermfg=255 guibg=#cd617a ctermbg=125 gui=NONE cterm=NONE
 hi xmlNamespace guifg=#ffc24b ctermfg=215 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi xmlAttribPunct guifg=#f43753 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi xmlProcessingDelim guifg=#f43753 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
@@ -272,6 +251,9 @@ hi javascriptFuncName guifg=#c9d05c ctermfg=185 guibg=NONE ctermbg=NONE gui=NONE
 hi yamlFlowString guifg=#d3b987 ctermfg=180 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi yamlFlowStringDelimiter guifg=#eeeeee ctermfg=255 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi yamlKeyValueDelimiter guifg=#f43753 ctermfg=203 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+
+hi Whitespace guifg=#62dad8 ctermfg=45 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi NVimInternalError guifg=White ctermfg=0 guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 
 let g:terminal_color_foreground = "#282828"
 let g:terminal_color_background = "#eeeeee"
@@ -291,8 +273,3 @@ let g:terminal_color_12 = "#b3deef"
 let g:terminal_color_13 = "#d3b987"
 let g:terminal_color_14 = "#73cef4"
 let g:terminal_color_15 = "#ffffff"
-
-" ===================================
-" Generated by Estilo 1.4.1
-" https://github.com/jacoborus/estilo
-" ===================================
