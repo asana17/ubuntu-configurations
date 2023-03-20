@@ -154,11 +154,17 @@ XDG_CONFIG_HOME=.config
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+function zle-line-init zle-keymap-select {
+    VIM_NORMAL="%K{208}%F{black}⮀%k%f%K{208}%F{white} % NORMAL %k%f%K{black}%F{208}⮀%k%f"
+    VIM_INSERT="%K{075}%F{black}⮀%k%f%K{075}%F{white} % INSERT %k%f%K{black}%F{075}⮀%k%f"
+    RPS1="${${KEYMAP/vicmd/$VIM_NORMAL}/(main|viins)/$VIM_INSERT}"
+    RPS2=$RPS1
+    zle reset-prompt
+}
 zle -N zle-line-init
 zle -N zle-keymap-select
 
 bindkey  -M viins 'jj' vi-cmd-mode
-export PATH="$PATH":~/.cargo/env
 export PATH="$PATH":~/.local/bin
 . "$HOME/.cargo/env"
 
@@ -166,5 +172,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+export FZF_ALT_C_COMMAND='rg --hidden -l ""'
 export FZF_CTRL_T_COMMAND='rg --files --hidden --glob "!.git/*"'
 export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'

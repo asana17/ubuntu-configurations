@@ -96,6 +96,11 @@ hi mkdHeading guifg=#e09eff
 hi link mkdNonListItemBlock Normal
 hi mkdLink cterm=underline gui=underline guifg=#1fc8c7
 hi mkdListItemLine ctermfg=0 guifg=#a9bcff
+hi LspInformationHighlight gui=None cterm=None
+hi LspHintHighlight gui=None cterm=None
+hi link LspWarningHighlight Todo
+hi link LspInformationText Hint
+hi link LspHintText Hint
 set pumblend=20
 
 " persisitend_undo
@@ -105,7 +110,7 @@ if has('persistent_undo')
   set undofile
 endif
 
-" カーソル下のhighlight情報を表示する {{{
+" get highlight info under cursor
 function! s:get_syn_id(transparent)
   let synid = synID(line("."), col("."), 1)
   if a:transparent
