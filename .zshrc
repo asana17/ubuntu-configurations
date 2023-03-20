@@ -144,6 +144,7 @@ zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
 alias ls='ls --color=auto'
+function chpwd() {ls -v -F --color=auto }
 
 alias cat='bat'
 
