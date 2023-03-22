@@ -53,6 +53,7 @@
 
 ### neovim
 #### install
+- get nightly from github
 - `sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim`
 - install `dein` from GitHub
 - download `init.vim` \& `dein.toml` from this repo

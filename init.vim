@@ -66,6 +66,7 @@ set title
 set mouse=a
 set whichwrap=b,s,h,l,<,>,[,],~
 set formatoptions-=cro
+set sessionoptions+=winpos,terminal,folds
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 inoremap <silent> jj <ESC>
 
@@ -137,6 +138,9 @@ function! s:get_syn_info()
 endfunction
 command! SyntaxInfo call s:get_syn_info()
 
+
+"---- nvim-treesitter.configs-----
+
 lua << EOF
   require("nvim-treesitter.configs").setup {
     highlight = {
@@ -161,7 +165,10 @@ lua << EOF
       enable = false -- disable builtin indent module
     }
   }
+  require('hlargs').setup()
 EOF
+
+"---- end treesitter config ----
 
 lua << EOF
 vim.g.material_style = "deep ocean"
@@ -265,4 +272,3 @@ hi link LspHintText Hint
 hi LspErrorVirtualText ctermfg=125 guifg=#cd617a
 hi LspWarningVirtualText guifg=#cf7754 ctermfg=172
 set pumblend=20
-

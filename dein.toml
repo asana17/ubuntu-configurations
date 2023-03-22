@@ -39,6 +39,49 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'terryma/vim-expand-region'
+lua_add = '''
+  vim.opt.list = true
+  vim.opt.listchars:append "space:⋅"
+
+  require("indent_blankline").setup {
+      show_end_of_line = true,
+      space_char_blankline = " ",
+  }
+'''
+
+[[plugins]]
+repo = 'lukas-reineke/indent-blankline.nvim'
+
+[[plugins]]
+repo = 'machakann/vim-sandwich'
+
+[[plugins]]
+repo = 'bkad/CamelCaseMotion'
+hook_add = '''
+  let g:camelcasemotion_key = '<leader>'
+'''
+[[plugins]]
+repo = 'haya14busa/vim-asterisk'
+hook_add = '''
+  map *  <Plug>(asterisk-z*)
+  map #  <Plug>(asterisk-z#)
+  map g* <Plug>(asterisk-gz*)
+  map g# <Plug>(asterisk-gz#)
+'''
+[[plugins]]
+repo = 'folke/which-key.nvim'
+lua_add = '''
+  vim.o.timeout = true
+  vim.o.timeoutlen = 300
+  require("which-key").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+'''
+
+[[plugins]]
 repo = 'junegunn/fzf'
 build = './install --all'
 merged = 0
@@ -78,7 +121,61 @@ hook_add = '''
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'
+[[plugins]]
+repo = 'tyru/open-browser-github.vim'
 
+[[plugins]]
+repo = 't9md/vim-quickhl'
+[[plugins]]
+repo = 'petertriho/nvim-scrollbar'
+lua_add = '''
+  require("scrollbar").setup()
+'''
+[[plugins]]
+repo = 'kevinhwang91/nvim-hlslens'
+lua_add = '''
+  require('hlslens').setup()
+
+  local kopts = {noremap = true, silent = true}
+
+  vim.api.nvim_set_keymap('n', 'n',
+      [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+      kopts)
+  vim.api.nvim_set_keymap('n', 'N',
+      [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+      kopts)
+  vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+  vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+  vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+  vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+
+  vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
+'''
+
+[[plugins]]
+repo = 'unblevable/quick-scope'
+
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+
+[[plugins]]
+repo = 'Shougo/ddx.vim'
+
+[[plugins]]
+repo = 'windwp/nvim-autopairs'
+lua_add = '''
+  require("nvim-autopairs").setup {}
+'''
+
+[[plugins]]
+repo = 'michaelb/sniprun'
+build = './install.sh'
+
+[[plugins]]
+repo = 'rhysd/committia.vim'
+
+[[plugins]]
+repo = 'mtdl9/vim-log-highlighting'
 
 #--------------------------------------
 
@@ -116,7 +213,6 @@ hook_source = '''
 '''
 
 #----------snippets-------------
-#Ctrl-kで展開、Ctrl-kで次の部分へ
 
 [[plugins]]
 repo = 'Shougo/neosnippet.vim'
@@ -157,24 +253,12 @@ repo = "prabirshrestha/asyncomplete-lsp.vim"
 [[plugins]]
 repo = "prabirshrestha/vim-lsp"
 hook_add = '''
-  let g:lsp_diagnostics_enabled = 1
-  let g:asyncomplete_auto_popup = 1
-  let g:asyncomplete_auto_completeopt = 1
-  let g:asyncomplete_popup_delay = 200
-  let g:lsp_text_edit_enabled = 1
   let g:lsp_signs_enabled = 1
   let g:lsp_diagnostics_virtual_text_prefix = " ‣ "
   let g:lsp_diagnostics_virtual_text_align = "right"
-  let g:lsp_preview_float = 0
   let g:lsp_peek_alignment = "right"
-  let g:lsp_prevew_max_height = 8
-
   autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-
-  setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes
-  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
   nmap <buffer> gd <plug>(lsp-definition)
   nmap <buffer> gs <plug>(lsp-document-symbol-search)
   nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
@@ -191,26 +275,21 @@ hook_add = '''
 repo = "mattn/vim-lsp-settings"
 
 [[plugins]]
-repo = 'nvim-tree/nvim-web-devicons'
-[[plugins]]
-repo = 'folke/trouble.nvim'
-lua_add = '''
-  require("trouble").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
-'''
-
-[[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
 hook_post_update = '''
   :TSupdate
 '''
+
+[[plugins]]
+repo = "haringsrob/nvim_context_vt"
+
 [[plugins]]
 repo = 'yioneko/nvim-yati'
 on_ft='*'
-
+[[plugins]]
+repo = 'm-demare/hlargs.nvim'
+[[plugins]]
+repo = 'norcalli/nvim-colorizer.lua'
 
 [[plugins]]
 repo = "rhysd/vim-grammarous"
