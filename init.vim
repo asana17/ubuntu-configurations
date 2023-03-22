@@ -89,19 +89,7 @@ if (has("termguicolors"))
  set termguicolors
 endif
 
-" Theme
-colorscheme mycolor
-" for vim markdown
-hi mkdHeading guifg=#e09eff
-hi link mkdNonListItemBlock Normal
-hi mkdLink cterm=underline gui=underline guifg=#1fc8c7
-hi mkdListItemLine ctermfg=0 guifg=#a9bcff
-hi LspInformationHighlight gui=None cterm=None
-hi LspHintHighlight gui=None cterm=None
-hi link LspWarningHighlight Todo
-hi link LspInformationText Hint
-hi link LspHintText Hint
-set pumblend=20
+
 
 " persisitend_undo
 if has('persistent_undo')
@@ -148,3 +136,133 @@ function! s:get_syn_info()
         \ " guibg: " . linkedSyn.guibg
 endfunction
 command! SyntaxInfo call s:get_syn_info()
+
+lua << EOF
+  require("nvim-treesitter.configs").setup {
+    highlight = {
+      enable = true,
+    },
+    yati = {
+      enable = true,
+      -- Disable by languages, see `Supported languages`
+      disable = { "python" },
+
+      -- Whether to enable lazy mode (recommend to enable this if bad indent happens frequently)
+      default_lazy = true,
+
+      -- Determine the fallback method used when we cannot calculate indent by tree-sitter
+      --   "auto": fallback to vim auto indent
+      --   "asis": use current indent as-is
+      --   "cindent": see `:h cindent()`
+      -- Or a custom function return the final indent result.
+      default_fallback = "auto"
+    },
+    indent = {
+      enable = false -- disable builtin indent module
+    }
+  }
+EOF
+
+lua << EOF
+vim.g.material_style = "deep ocean"
+local material = require 'material'
+local colors = require 'material.colors'
+require('material').setup({
+
+    contrast = {
+        terminal = false, -- Enable contrast for the built-in terminal
+        sidebars = false, -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
+        floating_windows = false, -- Enable contrast for floating windows
+        cursor_line = false, -- Enable darker background for the cursor line
+        non_current_windows = false, -- Enable darker background for non-current windows
+        filetypes = {}, -- Specify which filetypes get the contrasted (darker) background
+    },
+
+    styles = { -- Give comments style such as bold, italic, underline etc.
+        comments = { --[[ italic = true ]] },
+        strings = { --[[ bold = true ]] },
+        keywords = { --[[ underline = true ]] },
+        functions = { --[[ bold = true, undercurl = true ]] },
+        variables = {},
+        operators = {},
+        types = {},
+    },
+
+    plugins = { -- Uncomment the plugins that you use to highlight them
+        -- Available plugins:
+        -- "dap",
+        -- "dashboard",
+        -- "gitsigns",
+        -- "hop",
+        -- "indent-blankline",
+        -- "lspsaga",
+        -- "mini",
+        -- "neogit",
+        -- "neorg",
+        -- "nvim-cmp",
+        -- "nvim-navic",
+        -- "nvim-tree",
+        -- "nvim-web-devicons",
+        -- "sneak",
+        -- "telescope",
+         "trouble",
+        -- "which-key",
+    },
+
+    disable = {
+        colored_cursor = false, -- Disable the colored cursor
+        borders = false, -- Disable borders between verticaly split windows
+        background = true, -- Prevent the theme from setting the background (NeoVim then uses your terminal background)
+        term_colors = false, -- Prevent the theme from setting terminal colors
+        eob_lines = false -- Hide the end-of-buffer lines
+    },
+
+    high_visibility = {
+        lighter = false, -- Enable higher contrast text for lighter style
+        darker = false -- Enable higher contrast text for darker style
+    },
+
+    lualine_style = "default", -- Lualine style ( can be 'stealth' or 'default' )
+
+    async_loading = true, -- Load parts of the theme asyncronously for faster startup (turned on by default)
+
+    custom_colors = function(colors)
+    colors.editor.fg = "#eeeeee"
+    end, -- If you want to everride the default colors, set this to a function
+
+    custom_highlights = {
+      Comment = {fg = '#7777aa' },
+      Nontext = {fg = '#777777'},
+      LineNr = {fg = '#777777'},
+      Identifier = {fg = '#dddddd'}, -- variable
+      String = {fg = "#d3b987"},
+      Operator = {fg = '#aaaaaa'},
+      Function = {fg = '#83a7fa'},
+      Delimiter = {fg = '#bbbbbb'},
+      Cursor = {fg = '#000000', bg = '#eeeeee'},
+      ["@storageclass"] = {fg = '#ffff99'},
+      ["@constant.builtin"] = {fg = '#e5479B'},
+      ["@preproc"] = {fg = '#ef97f9'},
+      ["@keyword"] = {fg = '#5ac3ff'},
+      ["@include"] = {fg = '#cb50a2'},
+      ["@type"] = {fg = '#88ccb2'},
+      ["@field"] = {fg = '#c3aadd'},
+      ["@constant"] = {fg = '#ffaa99' },
+      ["@punctuation"] = {fg = '#cccccc' },
+      ["@punctuation.delimiter"] = {fg = '#cccccc' },
+    }, -- Overwrite highlights with your own
+})
+EOF
+
+" Theme
+colorscheme material
+" for vim-lsp
+hi LspInformationHighlight gui=None cterm=None
+hi LspHintHighlight gui=None cterm=None
+hi link LspWarningHighlight Todo
+hi link LspInformationText Hint
+hi link LspHintText Hint
+hi LspErrorVirtualText ctermfg=125 guifg=#cd617a
+hi LspWarningVirtualText guifg=#cf7754 ctermfg=172
+set pumblend=20
+

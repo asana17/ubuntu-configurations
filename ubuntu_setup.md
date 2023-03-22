@@ -58,8 +58,6 @@
 - download `init.vim` \& `dein.toml` from this repo
 #### undo setting
 - make directory `~/.config/nvim/undo`
-### theme
-- copy `mycolor.vim` to `~/.config/nvim/colors`
 
 #### lsp
 you need `g++-12` for LSP in ubuntu22.04

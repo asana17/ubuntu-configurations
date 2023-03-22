@@ -23,14 +23,13 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = "marko-cerovac/material.nvim"
+
+[[plugins]]
 repo = "airblade/vim-gitgutter"
 
 [[plugins]]
 repo = "tpope/vim-fugitive"
-
-#[[plugins]]
-#repo = "jacoborus/tender.vim"
-# copy tender.vim to .config/nvim/color/
 
 [[plugins]]
 repo = 'rhysd/accelerated-jk'
@@ -116,41 +115,6 @@ hook_source = '''
       \ }))
 '''
 
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-necosyntax.vim'
-depends = ['neco-syntax']
-hook_source = '''
-  call asyncomplete#register_source(asyncomplete#sources#necosyntax#get_source_options({
-      \ 'name': 'necosyntax',
-      \ 'whitelist': ['*'],
-      \ 'priority': 7,
-      \ 'completor': function('asyncomplete#sources#necosyntax#completor')
-      \ }))
-'''
-
-
-[[plugins]]
-repo = 'Shougo/neco-syntax'
-lazy = 1
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-necovim.vim'
-on_ft = ['vim']
-depends = ['neco-vim']
-hook_source = '''
-  call asyncomplete#register_source(asyncomplete#sources#necovim#get_source_options({
-      \ 'name': 'necovim',
-      \ 'whitelist': ['vim'],
-      \ 'priority': 9,
-      \ 'completor': function('asyncomplete#sources#necovim#completor')
-      \ }))
-'''
-
-[[plugins]]
-repo = 'Shougo/neco-vim'
-lazy = 1
-
-
 #----------snippets-------------
 #Ctrl-kで展開、Ctrl-kで次の部分へ
 
@@ -194,12 +158,18 @@ repo = "prabirshrestha/asyncomplete-lsp.vim"
 repo = "prabirshrestha/vim-lsp"
 hook_add = '''
   let g:lsp_diagnostics_enabled = 1
-  let g:lsp_diagnostics_echo_cursor = 1
   let g:asyncomplete_auto_popup = 1
   let g:asyncomplete_auto_completeopt = 1
   let g:asyncomplete_popup_delay = 200
-  let g:lsp_text_edit_enabled = 0
+  let g:lsp_text_edit_enabled = 1
   let g:lsp_signs_enabled = 1
+  let g:lsp_diagnostics_virtual_text_prefix = " ‣ "
+  let g:lsp_diagnostics_virtual_text_align = "right"
+  let g:lsp_preview_float = 0
+  let g:lsp_peek_alignment = "right"
+  let g:lsp_prevew_max_height = 8
+
+  autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 
   setlocal omnifunc=lsp#complete
@@ -219,6 +189,28 @@ hook_add = '''
 
 [[plugins]]
 repo = "mattn/vim-lsp-settings"
+
+[[plugins]]
+repo = 'nvim-tree/nvim-web-devicons'
+[[plugins]]
+repo = 'folke/trouble.nvim'
+lua_add = '''
+  require("trouble").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+'''
+
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+hook_post_update = '''
+  :TSupdate
+'''
+[[plugins]]
+repo = 'yioneko/nvim-yati'
+on_ft='*'
+
 
 [[plugins]]
 repo = "rhysd/vim-grammarous"
