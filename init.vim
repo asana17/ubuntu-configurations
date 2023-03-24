@@ -67,6 +67,7 @@ set mouse=a
 set whichwrap=b,s,h,l,<,>,[,],~
 set formatoptions-=cro
 set sessionoptions+=winpos,terminal,folds
+autocmd QuickFixCmdPost *grep* cwindow
 autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 inoremap <silent> jj <ESC>
 
@@ -247,6 +248,9 @@ require('material').setup({
       Function = {fg = '#83a7fa'},
       Delimiter = {fg = '#bbbbbb'},
       Cursor = {fg = '#000000', bg = '#eeeeee'},
+      Search = {fg = '#ffffff', underline = true},
+      IncSearch = {fg = '#ffffff', underline = true},
+      QuickFixLine = {fg = '#ffffff', underline = true},
       ["@storageclass"] = {fg = '#ffff99'},
       ["@constant.builtin"] = {fg = '#e5479B'},
       ["@preproc"] = {fg = '#ef97f9'},
