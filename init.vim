@@ -65,10 +65,11 @@ set noswapfile
 set title
 set mouse=a
 set whichwrap=b,s,h,l,<,>,[,],~
-set formatoptions-=cro
+set formatoptions-=ro
 set sessionoptions+=winpos,terminal,folds
 autocmd QuickFixCmdPost *grep* cwindow
-autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
+autocmd FileType qf wincmd J
+
 inoremap <silent> jj <ESC>
 
 set shell=/usr/bin/zsh
@@ -91,54 +92,12 @@ if (has("termguicolors"))
  set termguicolors
 endif
 
-
-
 " persisitend_undo
 if has('persistent_undo')
-  let undo_path = expand('~/.config/nvim/undo')
+  let undo_path = expand('/tmp/nvim/undo')
   exe 'set undodir=' .. undo_path
   set undofile
 endif
-
-" get highlight info under cursor
-function! s:get_syn_id(transparent)
-  let synid = synID(line("."), col("."), 1)
-  if a:transparent
-    return synIDtrans(synid)
-  else
-    return synid
-  endif
-endfunction
-function! s:get_syn_attr(synid)
-  let name = synIDattr(a:synid, "name")
-  let ctermfg = synIDattr(a:synid, "fg", "cterm")
-  let ctermbg = synIDattr(a:synid, "bg", "cterm")
-  let guifg = synIDattr(a:synid, "fg", "gui")
-  let guibg = synIDattr(a:synid, "bg", "gui")
-  return {
-        \ "name": name,
-        \ "ctermfg": ctermfg,
-        \ "ctermbg": ctermbg,
-        \ "guifg": guifg,
-        \ "guibg": guibg}
-endfunction
-function! s:get_syn_info()
-  let baseSyn = s:get_syn_attr(s:get_syn_id(0))
-  echo "name: " . baseSyn.name .
-        \ " ctermfg: " . baseSyn.ctermfg .
-        \ " ctermbg: " . baseSyn.ctermbg .
-        \ " guifg: " . baseSyn.guifg .
-        \ " guibg: " . baseSyn.guibg
-  let linkedSyn = s:get_syn_attr(s:get_syn_id(1))
-  echo "links to"
-  echo "name: " . linkedSyn.name .
-        \ " ctermfg: " . linkedSyn.ctermfg .
-        \ " ctermbg: " . linkedSyn.ctermbg .
-        \ " guifg: " . linkedSyn.guifg .
-        \ " guibg: " . linkedSyn.guibg
-endfunction
-command! SyntaxInfo call s:get_syn_info()
-
 
 "---- nvim-treesitter.configs-----
 
@@ -166,10 +125,14 @@ lua << EOF
       enable = false -- disable builtin indent module
     }
   }
-  require('hlargs').setup()
+  require('hlargs').setup{
+    color = '#cceedd',
+  }
+  require('anywise_reg').setup()
 EOF
 
-"---- end treesitter config ----
+
+"---- material theme ------
 
 lua << EOF
 vim.g.material_style = "deep ocean"
@@ -235,7 +198,7 @@ require('material').setup({
     async_loading = true, -- Load parts of the theme asyncronously for faster startup (turned on by default)
 
     custom_colors = function(colors)
-    colors.editor.fg = "#eeeeee"
+    colors.editor.fg = "#dddddd"
     end, -- If you want to everride the default colors, set this to a function
 
     custom_highlights = {
@@ -244,23 +207,32 @@ require('material').setup({
       LineNr = {fg = '#777777'},
       Identifier = {fg = '#dddddd'}, -- variable
       String = {fg = "#d3b987"},
-      Operator = {fg = '#aaaaaa'},
-      Function = {fg = '#83a7fa'},
+      Operator = {fg = '#cccccc'},
+      Function = {fg = '#a5c9fc'},
       Delimiter = {fg = '#bbbbbb'},
       Cursor = {fg = '#000000', bg = '#eeeeee'},
       Search = {fg = '#ffffff', underline = true},
       IncSearch = {fg = '#ffffff', underline = true},
       QuickFixLine = {fg = '#ffffff', underline = true},
-      ["@storageclass"] = {fg = '#ffff99'},
-      ["@constant.builtin"] = {fg = '#e5479B'},
+      Folded = {fg = '#aaaaaa', italic = true},
+      ["@attribute"] = {fg = '#60f3c2'},
+      ["@storageclass"] = {fg = '#a081ff'},
+      ["@constant.builtin"] = {fg = '#ff7c3c'},
       ["@preproc"] = {fg = '#ef97f9'},
-      ["@keyword"] = {fg = '#5ac3ff'},
-      ["@include"] = {fg = '#cb50a2'},
-      ["@type"] = {fg = '#88ccb2'},
+      ["@keyword"] = {fg = '#9070ff'},
+      ["@keyword.function"] = {fg = '#ed4091'},
+      ["@include"] = {fg = '#ba4091'},
+      ["@type"] = {fg = '#ccb044'},
+      ["@type.qualifier"] = {fg = '#a081ff'},
+      ["@type.builtin"] = {fg = '#ed4091'},
+      ["@namespace"] = {fg = '#66ddff'},
       ["@field"] = {fg = '#c3aadd'},
-      ["@constant"] = {fg = '#ffaa99' },
+      ["@constant"] = {fg = '#97c062' },
       ["@punctuation"] = {fg = '#cccccc' },
       ["@punctuation.delimiter"] = {fg = '#cccccc' },
+      ["@punctuation.bracket"] = {fg = '#cccccc' },
+      ["@punctuation.special"] = {fg = '#97d7e6' },
+      ["@function.macro"] = {fg = '#97d7e6'},
     }, -- Overwrite highlights with your own
 })
 EOF

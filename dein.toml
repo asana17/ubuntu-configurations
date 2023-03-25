@@ -51,6 +51,29 @@ lua_add = '''
 '''
 
 [[plugins]]
+repo = 'tversteeg/registers.nvim'
+lua_add = '''
+  local registers = require('registers')
+  registers.setup({
+    system_clipboard = true,
+    trim_whitespace = true,
+    hide_only_white_space = true,
+    show_register_types = true,
+    bind_keys = {
+      ["<Tab>"] = registers.move_cursor_down(),
+    },
+    window = {
+      max_width = 100,
+      highlight_cursorline = true,
+      transparency = 30,
+    }
+  })
+'''
+
+[[plugins]]
+repo = 'kevinhwang91/nvim-bqf'
+
+[[plugins]]
 repo = 'lukas-reineke/indent-blankline.nvim'
 
 [[plugins]]
@@ -68,18 +91,12 @@ hook_add = '''
   map #  <Plug>(asterisk-z#)
   map g* <Plug>(asterisk-gz*)
   map g# <Plug>(asterisk-gz#)
+
+  let g:asterisk#keeppos = 1
 '''
+
 [[plugins]]
-repo = 'folke/which-key.nvim'
-lua_add = '''
-  vim.o.timeout = true
-  vim.o.timeoutlen = 300
-  require("which-key").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
-'''
+repo = 'lambdalisue/readablefold.vim'
 
 [[plugins]]
 repo = 'junegunn/fzf'
@@ -126,11 +143,6 @@ repo = 'tyru/open-browser-github.vim'
 
 [[plugins]]
 repo = 't9md/vim-quickhl'
-[[plugins]]
-repo = 'petertriho/nvim-scrollbar'
-lua_add = '''
-  require("scrollbar").setup()
-'''
 [[plugins]]
 repo = 'kevinhwang91/nvim-hlslens'
 lua_add = '''
@@ -281,7 +293,7 @@ hook_post_update = '''
 '''
 
 [[plugins]]
-repo = "haringsrob/nvim_context_vt"
+repo = 'nvim-treesitter/playground'
 
 [[plugins]]
 repo = 'yioneko/nvim-yati'
@@ -290,6 +302,8 @@ on_ft='*'
 repo = 'm-demare/hlargs.nvim'
 [[plugins]]
 repo = 'norcalli/nvim-colorizer.lua'
+[[plugins]]
+repo = 'AckslD/nvim-anywise-reg.lua'
 
 [[plugins]]
 repo = "rhysd/vim-grammarous"
@@ -304,15 +318,15 @@ hook_add = '''
   function! g:grammarous#hooks.on_check(errs) abort
       nmap <buffer> n <Plug>(grammarous-move-to-next-error)
       nmap <buffer> p <Plug>(grammarous-move-to-previous-error)
-      nmap <buffer> f <Plug>(grammarous-fixit)
-      nmap <buffer> r <Plug>(grammarous-remove-error)
+      nmap <buffer> <C-f> <Plug>(grammarous-fixit)
+      nmap <buffer> <C-r> <Plug>(grammarous-remove-error)
   endfunction
 
   function! g:grammarous#hooks.on_reset(errs) abort
       nunmap <buffer> n
       nunmap <buffer> p
-      nunmap <buffer> f
-      nunmap <buffer> r
+      nunmap <buffer> <C-f>
+      nunmap <buffer> <C-r>
   endfunction
 '''
 # to fix bug temporaliy, need to delete vim-grammarous/autoload/grammarous.vim L698: "call grammarous#info_win#close()
