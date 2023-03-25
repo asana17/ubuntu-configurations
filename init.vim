@@ -227,6 +227,7 @@ require('material').setup({
       ["@type.builtin"] = {fg = '#ed4091'},
       ["@namespace"] = {fg = '#66ddff'},
       ["@field"] = {fg = '#c3aadd'},
+      ["@property"] = {fg = '#c3aadd'},
       ["@constant"] = {fg = '#97c062' },
       ["@punctuation"] = {fg = '#cccccc' },
       ["@punctuation.delimiter"] = {fg = '#cccccc' },
