@@ -2,6 +2,7 @@
 repo = "lambdalisue/fern.vim"
 hook_add = '''
   let g:fern#default_hidden=1
+  command! -nargs=* E vsplit | wincmd l | e.
 '''
 
 [[plugins]]
@@ -30,6 +31,19 @@ repo = "airblade/vim-gitgutter"
 
 [[plugins]]
 repo = "tpope/vim-fugitive"
+
+[[plugins]]
+repo = "tpope/vim-rhubarb"
+
+[[plugins]]
+repo = "tpope/vim-surround"
+
+[[plugins]]
+repo = "preservim/nerdcommenter"
+hook_add = '''
+  let g:NERDSpaceDelims=1
+  let g:NERDDefaultAlign='left'
+'''
 
 [[plugins]]
 repo = 'rhysd/accelerated-jk'
@@ -61,6 +75,7 @@ lua_add = '''
     show_register_types = true,
     bind_keys = {
       ["<Tab>"] = registers.move_cursor_down(),
+      ["<S-Tab>"] = registers.move_cursor_up(),
     },
     window = {
       max_width = 100,
@@ -128,6 +143,9 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'mattn/vim-maketable'
+
+[[plugins]]
 repo = 'previm/previm'
 hook_add = '''
     autocmd BufRead,BufNewFile *.md  set filetype=markdown
@@ -188,6 +206,9 @@ repo = 'rhysd/committia.vim'
 
 [[plugins]]
 repo = 'mtdl9/vim-log-highlighting'
+
+[[plugins]]
+repo = 'LeafCage/vimhelpgenerator'
 
 #--------------------------------------
 
@@ -269,7 +290,6 @@ hook_add = '''
   let g:lsp_diagnostics_virtual_text_prefix = " ‣ "
   let g:lsp_diagnostics_virtual_text_align = "right"
   let g:lsp_peek_alignment = "right"
-  autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
   nmap <buffer> gd <plug>(lsp-definition)
   nmap <buffer> gs <plug>(lsp-document-symbol-search)
@@ -446,5 +466,3 @@ hook_add = '''
   "let g:Tex_ViewRule_pdf = 'firefox -new-window'
   "let g:Tex_ViewRule_pdf = 'chromium --new-window'
 '''
-
-

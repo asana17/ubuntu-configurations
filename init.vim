@@ -249,3 +249,6 @@ hi link LspHintText Hint
 hi LspErrorVirtualText ctermfg=125 guifg=#cd617a
 hi LspWarningVirtualText guifg=#cf7754 ctermfg=172
 set pumblend=20
+
+"session plugin
+let g:session_path = "/home/kaightasa/.config/nvim/session"

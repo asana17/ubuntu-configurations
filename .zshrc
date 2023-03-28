@@ -130,6 +130,9 @@ if type trash-put &> /dev/null
     alias rm=trash-put
 fi
 
+# for persistent undo
+mkdir -p /tmp/nvim/undo
+
 
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
@@ -175,3 +178,5 @@ export NVM_DIR="$HOME/.nvm"
 
 export FZF_CTRL_T_COMMAND='rg --files --hidden --glob "!.git/*"'
 export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
+export DENO_INSTALL="/home/kaightasa/.deno"
+  export PATH="$DENO_INSTALL/bin:$PATH"
