@@ -1,0 +1,6 @@
+require("start")
+require("commands")
+require("colorscheme")
+require("keymaps")
+require("options")
+require("plugins")
