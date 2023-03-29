@@ -27,6 +27,7 @@ require("packer").startup(function()
   use { "marko-cerovac/material.nvim" } -- colorscheme theme
   use { "nvim-lua/plenary.nvim" } -- common util
   use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } } -- status line
+  use { "kyazdani42/nvim-web-devicons" } -- File icons
 
   -- search
   use { "junegunn/fzf", run = "bash ./install --all" }
@@ -59,6 +60,7 @@ require("packer").startup(function()
   -- fern file tree viewer
   use { "lambdalisue/fern.vim" }
   use { "lambdalisue/fern-hijack.vim" } -- override default vim editor
+  use { "lambdalisue/fern-git-status.vim" } -- override default vim editor
   use { "LumaKernel/fern-mapping-fzf.vim" } -- use fzf in fern
 
   -- syntax
@@ -66,6 +68,25 @@ require("packer").startup(function()
   use { "LeafCage/vimhelpgenerator" } -- syntax highlight logs
   use { "rhysd/vim-grammarous" } -- grammar check: to fix bug temporaliy, need to delete vim-grammarous/autoload/grammarous.vim L698: "call grammarous#info_win#close()
 
+  -- completion
+  use { "hrsh7th/nvim-cmp" }
+  use { "hrsh7th/cmp-nvim-lsp" }
+  use { "hrsh7th/vim-vsnip" }
+  use { "hrsh7th/cmp-path" }
+  use { "hrsh7th/cmp-buffer" }
+  use { "hrsh7th/cmp-cmdline"}
+  use { "L3MON4D3/LuaSnip" }
+  use { "saadparwaiz1/cmp_luasnip" }
+  use { "rafamadriz/friendly-snippets" }
+  use { "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" }
+
+  -- lsp
+  use { "neovim/nvim-lspconfig" } -- official configuration
+  use { "williamboman/mason.nvim",  run = ":MasonUpdate" } -- lsp server install helper
+  use { "williamboman/mason-lspconfig.nvim"} -- package support above
+  use { "jose-elias-alvarez/null-ls.nvim",  requires = "nvim-lua/plenary.nvim"} -- formatter and linter
+  use { "folke/neodev.nvim" } -- neovim setup for luaAPI
+  use { "folke/trouble.nvim", requires = "nvim-tree/nvim-web-devicons" }
 
   -- treesitter
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" } -- syntax tree analyzer
@@ -82,6 +103,7 @@ require("packer").startup(function()
 
   -- rust
   use { "rust-lang/rust.vim" }
+  use { "simrat39/rust-tools.nvim" }
 
   -- markdown
   use { "preservim/vim-markdown" } -- markdown syntax highlightning and extensions

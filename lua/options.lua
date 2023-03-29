@@ -1,5 +1,4 @@
 local options = {
-  compatible = false,
   encoding = "utf-8",
   fileencoding = "utf-8",
   number = true,
@@ -27,7 +26,8 @@ local options = {
   whichwrap = "b,s,h,l,<,>,[,],~",
   shell = "/usr/bin/zsh",
   pumblend = 20,
---  winblend = 20,
+  completeopt={menu,preview,menuone,noselect},
+  --winblend = 50,
 }
 
 for key, value in pairs(options) do

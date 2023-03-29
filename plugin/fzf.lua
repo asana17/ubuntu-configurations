@@ -1,11 +1,12 @@
 vim.cmd [[
-  function! s:find_rip_grep() abort
-        call fzf#vim#grep(
-                    \   'rg --ignore-file ~/.ignore --column --line-number --no-heading --hidden --smart-case .+',
-                    \   1,
-                    \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%', '?'),
-                    \   0,
-                    \ )
-    endfunction
-    nnoremap <silent> <Leader>g :<C-u>silent call <SID>find_rip_grep()<CR>
+  function! RipgrepFzf(query, fullscreen)
+    let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+    let initial_command = printf(command_fmt, shellescape(a:query))
+    let reload_command = printf(command_fmt, '{q}')
+    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+    call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+  endfunction
+
+  command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+  nnoremap <silent> <Leader>g :RG<CR>
 ]]

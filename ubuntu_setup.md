@@ -27,9 +27,9 @@
   - change height percent to 100% `gsettings set com.gexperts.Tilix.Settings quake-height-percent 100`
 
 - Profiles
-  - Command: run as a login shell  
+  - Command: run as a login shell
           run a custom command 'zsh'
-  - Color: scheme 'Monokai Dark'  
+  - Color: scheme 'Monokai Dark'
           add transparency
 #### others
 - add custom keyboard shortcuts to ubuntu
@@ -55,11 +55,13 @@
 #### install
 - get nightly from github
 - `sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim`
-- install `dein` from GitHub
-- download `init.vim` \& `dein.toml` from this repo
+- copy lua nvim configs (not using init.vim and dein.toml)
+- download `nerd-fonts` from GitHub
 
 #### lsp
-you need `g++-12` for LSP in ubuntu22.04
+- you need `g++-12` for LSP in ubuntu22.04
+- `rustup +nightly component add rust-analyzer-preview` then `rustup show` and add rust-analyzer to path
+
 #### tagbar
 1. You need to install ctags [description](https://docs.ctags.io/en/latest/autotools.html#gnu-linux-distributions)
 2. copy .ctags from this repo

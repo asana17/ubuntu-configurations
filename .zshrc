@@ -171,6 +171,7 @@ zle -N zle-keymap-select
 bindkey  -M viins 'jj' vi-cmd-mode
 export PATH="$PATH":~/.local/bin
 . "$HOME/.cargo/env"
+export PATH="$PATH":~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
