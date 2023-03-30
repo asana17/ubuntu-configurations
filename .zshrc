@@ -198,7 +198,7 @@ export FZF_CTRL_T_OPTS=" \
       --line-range :200 {}' \
 --preview-window 'down,60%,wrap,+3/2,~3'"
 
-export FZF_ALT_C_COMMAND="rg --hidden --files -g '!{.git}' --null | xargs -0 dirname | uniq"
+export FZF_ALT_C_COMMAND="find ./ -type d \( -name '.git' -o -name 'node_modules' \) -prune -o -type d"
 export FZF_ALT_C_OPTS="--preview 'tree -aC -L 1 {} | head -200'"
 
 export DENO_INSTALL="/home/kaightasa/.deno"

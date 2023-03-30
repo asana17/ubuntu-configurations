@@ -6,25 +6,6 @@ require("mason-lspconfig").setup{
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', '<C-h>', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  --vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  --vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  --vim.keymap.set('n', '<space>wl', function()
-  --  print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  --end, bufopts)
-  --vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  --vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  --vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  --vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  --vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
 
 require("neodev").setup()
@@ -36,6 +17,32 @@ require("mason-lspconfig").setup_handlers {
     }
   end,
   ["rust_analyzer"] = function ()
-    require("rust-tools").setup {}
+    require("rust-tools").setup {
+    }
   end,
 }
+
+-- Mappings.
+-- See `:help vim.lsp.*` for documentation on any of the below functions
+local bufopts = { noremap=true }
+vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', bufopts)
+vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', bufopts)
+vim.keymap.set('n', 'gf', '<cmd>lua vim.lsp.buf.formatting()<CR>', bufopts)
+vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', bufopts)
+vim.keymap.set('n', '<C-h>', '<cmd>lua vim.lsp.buf.hover()<CR>', bufopts)
+vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', bufopts)
+vim.keymap.set('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', bufopts)
+vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', bufopts)
+--vim.keymap.set('n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<CR>', bufopts)
+--vim.keymap.set('n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', bufopts)
+--vim.keymap.set('n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>', bufopts)
+vim.keymap.set('n', 'ge', '<cmd>Trouble<CR>', bufopts)
+vim.cmd "command! -nargs=* LspDeclaration lua vim.lsp.buf.declaration()<CR>"
+vim.cmd "command! -nargs=* LspDefinition lua vim.lsp.buf.definition()<CR>"
+vim.cmd "command! -nargs=* LspReferences lua vim.lsp.buf.references()<CR>"
+vim.cmd "command! -nargs=* LspFormat lua vim.lsp.buf.formatting()<CR>"
+vim.cmd "command! -nargs=* LspHover lua vim.lsp.buf.hover()<CR>"
+vim.cmd "command! -nargs=* LspImplementation lua vim.lsp.buf.implementation()<CR>"
+vim.cmd "command! -nargs=* LspTypeDefinition lua vim.lsp.buf.type_definition()<CR>"
+vim.cmd "command! -nargs=* LspCodeAction lua vim.lsp.buf.code_action()<CR>"
+vim.cmd "command! -nargs=* LspRename lua vim.lsp.buf.rename()<CR>"
