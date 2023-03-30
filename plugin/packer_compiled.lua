@@ -344,6 +344,11 @@ _G.packer_plugins = {
     path = "/home/kaightasa/.local/share/nvim/site/pack/packer/start/vim-asterisk",
     url = "https://github.com/haya14busa/vim-asterisk"
   },
+  ["vim-bookmarks"] = {
+    loaded = true,
+    path = "/home/kaightasa/.local/share/nvim/site/pack/packer/start/vim-bookmarks",
+    url = "https://github.com/MattesGroeger/vim-bookmarks"
+  },
   ["vim-expand-region"] = {
     loaded = true,
     path = "/home/kaightasa/.local/share/nvim/site/pack/packer/start/vim-expand-region",
