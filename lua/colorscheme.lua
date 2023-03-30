@@ -101,13 +101,3 @@ material.setup({
 })
 
 vim.cmd 'colorscheme material'
-
-vim.cmd [[
-  hi LspInformationHighlight gui=None cterm=None
-  hi LspHintHighlight gui=None cterm=None
-  hi link LspWarningHighlight Todo
-  hi link LspInformationText Hint
-  hi link LspHintText Hint
-  hi LspErrorVirtualText ctermfg=125 guifg=#cd617a
-  hi LspWarningVirtualText guifg=#cf7754 ctermfg=172
-]]

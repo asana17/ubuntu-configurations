@@ -177,7 +177,29 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export FZF_CTRL_T_COMMAND='rg --files --hidden --glob "!.git/*"'
-export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
+export FZF_DEFAULT_OPTS="--multi --height=60% --select-1 --exit-0 \
+  --reverse --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up"
+
+export FZF_CTRL_R_OPTS=$(cat <<"EOF"
+--preview '
+  echo {} \
+  | awk "{ sub(/\s*[0-9]*?\s*/, \"\"); gsub(/\\\\n/, \"\\n\"); print }" \
+  | bat --color=always --language=sh --style=plain
+'
+--preview-window 'down,40%,wrap'
+EOF
+)
+
+export FZF_CTRL_T_COMMAND="rg --files --hidden --no-heading -g '!{.git,node_modules,.rustup,.cargo,.local/share/Trash}'"
+export FZF_CTRL_T_OPTS=" \
+--preview ' \
+    bat --color=always \
+      --theme="Nord" \
+      --line-range :200 {}' \
+--preview-window 'down,60%,wrap,+3/2,~3'"
+
+export FZF_ALT_C_COMMAND="rg --hidden --files -g '!{.git}' --null | xargs -0 dirname | uniq"
+export FZF_ALT_C_OPTS="--preview 'tree -aC -L 1 {} | head -200'"
+
 export DENO_INSTALL="/home/kaightasa/.deno"
   export PATH="$DENO_INSTALL/bin:$PATH"

@@ -21,12 +21,10 @@ local options = {
   ignorecase = true,
   writebackup = false,
   undofile = true,
-  backspace={indent,eol,start},
   list = true,
   whichwrap = "b,s,h,l,<,>,[,],~",
   shell = "/usr/bin/zsh",
   pumblend = 20,
-  completeopt={menu,preview,menuone,noselect},
   --winblend = 50,
 }
 
@@ -36,5 +34,6 @@ end
 
 vim.cmd("set showmatch matchtime=1")
 vim.cmd("set backspace=indent,eol,start")
+vim.cmd("set completeopt=menu,preview,menuone,noselect")
 vim.cmd("set formatoptions-=ro")
 vim.cmd("set sessionoptions+=winpos,terminal,folds")
