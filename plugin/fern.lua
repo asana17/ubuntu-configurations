@@ -1,7 +1,13 @@
--- fern
+-- open fern
 vim.cmd [[
   let g:fern#default_hidden=1
   command! -nargs=* E e.
+]]
+
+-- vsplit with fern
+vim.cmd [[
+  command! -nargs=* VS vsplit | wincmd l | e.
+  cabbrev vs VS
 ]]
 
 -- fern-mapping-fzf
