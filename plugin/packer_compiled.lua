@@ -159,11 +159,6 @@ _G.packer_plugins = {
     path = "/home/kaightasa/.local/share/nvim/site/pack/packer/start/fern.vim",
     url = "https://github.com/lambdalisue/fern.vim"
   },
-  ["friendly-snippets"] = {
-    loaded = true,
-    path = "/home/kaightasa/.local/share/nvim/site/pack/packer/start/friendly-snippets",
-    url = "https://github.com/rafamadriz/friendly-snippets"
-  },
   fzf = {
     loaded = true,
     path = "/home/kaightasa/.local/share/nvim/site/pack/packer/start/fzf",
@@ -388,6 +383,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/kaightasa/.local/share/nvim/site/pack/packer/start/vim-quickhl",
     url = "https://github.com/t9md/vim-quickhl"
+  },
+  ["vim-snippets"] = {
+    loaded = true,
+    path = "/home/kaightasa/.local/share/nvim/site/pack/packer/start/vim-snippets",
+    url = "https://github.com/honza/vim-snippets"
   },
   ["vim-surround"] = {
     loaded = true,
