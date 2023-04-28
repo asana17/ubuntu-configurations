@@ -28,8 +28,6 @@ require("packer").startup(function()
   use { "nvim-lua/plenary.nvim" } -- common util
   use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } } -- status line
   use { "kyazdani42/nvim-web-devicons" } -- File icons
-  use { "rmagatti/auto-session" } -- auto session save and restore
-  use { "MattesGroeger/vim-bookmarks"} -- mark as bookmark
 
   -- search
   use { "junegunn/fzf", run = "bash ./install --all" }
@@ -47,6 +45,7 @@ require("packer").startup(function()
   use { "kevinhwang91/nvim-bqf"} -- add preview window for quickfix
   use { "bkad/CamelCaseMotion" } -- move, delete by CamelCase
   use { "godlygeek/tabular" } -- align with :Tab
+  use { "MattesGroeger/vim-bookmarks" } -- improve vim mark
 
   -- text view
   use { "lukas-reineke/indent-blankline.nvim" } -- show indent line
@@ -114,10 +113,6 @@ require("packer").startup(function()
 
   -- latex
   use { "vim-latex/vim-latex", tag = "*" }
-
-  -- binary editor
-  use { "vim-denops/denops.vim" } -- common functions
-  use { "Shougo/ddx.vim" } -- binary editor
 
   -- others
   use {"norcalli/nvim-colorizer.lua"} -- highlight rgb colors
