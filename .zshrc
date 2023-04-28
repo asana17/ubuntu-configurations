@@ -201,5 +201,4 @@ export FZF_CTRL_T_OPTS=" \
 export FZF_ALT_C_COMMAND="find ./ -type d \( -name '.git' -o -name 'node_modules' \) -prune -o -type d"
 export FZF_ALT_C_OPTS="--preview 'tree -aC -L 1 {} | head -200'"
 
-export DENO_INSTALL="/home/kaightasa/.deno"
-  export PATH="$DENO_INSTALL/bin:$PATH"
+alias kindle='wine64 explorer /desktop=D,5120x2100 ~/.wine/drive_c/Program\ Files\ \(x86\)/Amazon/Kindle/Kindle.exe'
