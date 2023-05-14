@@ -89,11 +89,6 @@ _G.packer_plugins = {
     path = "/home/kaightasa/.local/share/nvim/site/pack/packer/start/accelerated-jk",
     url = "https://github.com/rhysd/accelerated-jk"
   },
-  ["auto-session"] = {
-    loaded = true,
-    path = "/home/kaightasa/.local/share/nvim/site/pack/packer/start/auto-session",
-    url = "https://github.com/rmagatti/auto-session"
-  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/kaightasa/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -128,16 +123,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/kaightasa/.local/share/nvim/site/pack/packer/start/committia.vim",
     url = "https://github.com/rhysd/committia.vim"
-  },
-  ["ddx.vim"] = {
-    loaded = true,
-    path = "/home/kaightasa/.local/share/nvim/site/pack/packer/start/ddx.vim",
-    url = "https://github.com/Shougo/ddx.vim"
-  },
-  ["denops.vim"] = {
-    loaded = true,
-    path = "/home/kaightasa/.local/share/nvim/site/pack/packer/start/denops.vim",
-    url = "https://github.com/vim-denops/denops.vim"
   },
   ["fern-git-status.vim"] = {
     loaded = true,

@@ -24,8 +24,7 @@ local options = {
   list = true,
   whichwrap = "b,s,h,l,<,>,[,],~",
   shell = "/usr/bin/zsh",
-  pumblend = 20,
-  --winblend = 50,
+  pumblend = 30,
 }
 
 for key, value in pairs(options) do
@@ -34,6 +33,6 @@ end
 
 vim.cmd("set showmatch matchtime=1")
 vim.cmd("set backspace=indent,eol,start")
-vim.cmd("set completeopt=menu,preview,menuone,noselect")
+vim.cmd("set completeopt=menu,menuone,noselect")
 vim.cmd("set formatoptions-=ro")
 vim.cmd("set sessionoptions+=winpos,terminal,folds")
