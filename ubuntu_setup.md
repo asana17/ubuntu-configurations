@@ -57,6 +57,7 @@
 - `sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim`
 - copy lua nvim configs (not using init.vim and dein.toml)
 - download `nerd-fonts` from GitHub
+- `sudo apt install xsel xclip`
 
 #### lsp
 - you need `g++-12` for LSP in ubuntu22.04
