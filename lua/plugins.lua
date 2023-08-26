@@ -28,12 +28,14 @@ require("packer").startup(function()
   use { "nvim-lua/plenary.nvim" } -- common util
   use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } } -- status line
   use { "kyazdani42/nvim-web-devicons" } -- File icons
+  use { "MattesGroeger/vim-bookmarks"} -- mark as bookmark
 
   -- search
-  use { "junegunn/fzf", run = "bash ./install --all" }
-  use { "junegunn/fzf.vim"}
   use { "haya14busa/vim-asterisk" } -- improve * search
   use {'kevinhwang91/nvim-hlslens'} -- show search info
+
+  -- telescope
+  use { "nvim-telescope/telescope.nvim", tag = '0.1.2' }
 
   -- text editing
   use { "rhysd/accelerated-jk" } -- faster j/k scroll
@@ -45,7 +47,6 @@ require("packer").startup(function()
   use { "kevinhwang91/nvim-bqf"} -- add preview window for quickfix
   use { "bkad/CamelCaseMotion" } -- move, delete by CamelCase
   use { "godlygeek/tabular" } -- align with :Tab
-  use { "MattesGroeger/vim-bookmarks" } -- improve vim mark
 
   -- text view
   use { "lukas-reineke/indent-blankline.nvim" } -- show indent line
@@ -56,6 +57,7 @@ require("packer").startup(function()
   -- git
   use { "airblade/vim-gitgutter" } -- show git status in LineNr
   use { "tpope/vim-fugitive" } -- run git comannd on vim command
+  use { "ruanyl/vim-gh-line" } -- run git comannd on vim command
   use { "rhysd/committia.vim" } -- improve git editor window
 
   -- fern file tree viewer
@@ -94,6 +96,9 @@ require("packer").startup(function()
   use { "nvim-treesitter/playground" } -- common functions
   use { "yioneko/nvim-yati",  tag = "*" } -- indent
   use { "m-demare/hlargs.nvim" } -- highlight arguments of function
+
+  -- github copilot
+  use { "github/copilot.vim" }
 
   -- runner
   use { "michaelb/sniprun", run = "bash ./install.sh" } -- run visual snipped code

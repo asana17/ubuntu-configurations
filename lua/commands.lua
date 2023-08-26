@@ -14,6 +14,7 @@ autocmd("FileType", {
 -- open terminal with ":T"
 vim.cmd "command! -nargs=* T split | wincmd j | resize 15 | terminal <args>"
 
+
 -- start terminal with insert mode
 autocmd("TermOpen", {
   pattern = "*",
@@ -38,6 +39,11 @@ autocmd({ "BufReadPost" }, {
   callback = function()
     vim.api.nvim_exec('silent! normal! g`"zv', false)
   end,
+})
+
+autocmd({ "BufWritePost","BufEnter" }, {
+  pattern = {"*"},
+  command = "set nofoldenable foldmethod=manual foldlevelstart=99",
 })
 
 -- attempt to determine filetypes
