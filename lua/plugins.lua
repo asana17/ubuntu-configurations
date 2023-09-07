@@ -47,7 +47,7 @@ require("packer").startup(function()
   use { "kevinhwang91/nvim-bqf"} -- add preview window for quickfix
   use { "bkad/CamelCaseMotion" } -- move, delete by CamelCase
   use { "godlygeek/tabular" } -- align with :Tab
-  use { "lambdalisue/suda.vim"} -- edit with sudo
+  use { "lambdalisue/suda.vim" } -- text edit with sudo
 
   -- text view
   use { "lukas-reineke/indent-blankline.nvim" } -- show indent line
