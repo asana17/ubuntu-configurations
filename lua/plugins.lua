@@ -48,6 +48,7 @@ require("packer").startup(function()
   use { "bkad/CamelCaseMotion" } -- move, delete by CamelCase
   use { "godlygeek/tabular" } -- align with :Tab
   use { "lambdalisue/suda.vim" } -- text edit with sudo
+  use { "junegunn/vim-easy-align" } -- align with :EasyAlign
 
   -- text view
   use { "lukas-reineke/indent-blankline.nvim" } -- show indent line
