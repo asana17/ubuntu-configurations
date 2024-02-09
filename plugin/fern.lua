@@ -1,7 +1,7 @@
 -- open fern
 vim.cmd [[
   let g:fern#default_hidden=1
-  command! -nargs=* E Fern . --reveal=%
+  command! -nargs=* E Fern .
 ]]
 
 -- vsplit with fern

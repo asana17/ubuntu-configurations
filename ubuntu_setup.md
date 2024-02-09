@@ -39,7 +39,7 @@
     VteTerminal,
     TerminalScreen,
     vte-terminal {
-      padding: 40px 40px 40px 40px;
+      padding: 30px 30px 40px 40px;
       -VteTerminal-inner-border: 20px 20px 20px 20px;
     }
     ```
@@ -93,5 +93,5 @@ sudo apt install ripgrep
   change monospace font to Cica
 
 ## time
-fix misalignment of windows time
+fix misalignment of windows time when dualboot
 `timedatectl set-local-rtc 1`

@@ -1,19 +1,3 @@
--- automatically install packer
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = vim.fn.system({
-    "git",
-    "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
-  })
-  print("Installing packer close and reopen Neovim...")
-  vim.cmd([[packadd packer.nvim]])
-end
-
-
 -- reload nvim when plugin list updated
 vim.cmd([[
   augroup packer_user_config
@@ -49,6 +33,8 @@ require("packer").startup(function()
   use { "godlygeek/tabular" } -- align with :Tab
   use { "lambdalisue/suda.vim" } -- text edit with sudo
   use { "junegunn/vim-easy-align" } -- align with :EasyAlign
+  use { "mtdl9/vim-log-highlighting" } -- coloring log
+  use { "nicwest/vim-camelsnek" } -- convert between CamelCase and snake_case
 
   -- text view
   use { "lukas-reineke/indent-blankline.nvim" } -- show indent line
