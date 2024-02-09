@@ -8,7 +8,7 @@
 1. github-cli
 1. neovim (from GitHub)
 1. fzf
-1. bat
+1. batcat
 1. ripgrep
 1. trash-cli (apt)
 1. nemo
@@ -53,11 +53,13 @@
 
 ### neovim
 #### install
-- get nightly from github
-- `sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim`
+- get nightly from github (tar.gz)
+- mv nvim to `~/.local/*`
+- `sudo update-alternatives --install /usr/bin/vim vim ~/.local/bin/nvim`
 - copy lua nvim configs (not using init.vim and dein.toml)
 - download `nerd-fonts` from GitHub
 - `sudo apt install xsel xclip`
+- `git config --global core.editor vim`
 
 #### lsp
 - you need `g++-12` for LSP in ubuntu22.04
