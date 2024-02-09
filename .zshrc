@@ -159,10 +159,6 @@ XDG_CONFIG_HOME=.config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 function zle-line-init zle-keymap-select {
-    VIM_NORMAL="%K{208}%F{black}⮀%k%f%K{208}%F{white} % NORMAL %k%f%K{black}%F{208}⮀%k%f"
-    VIM_INSERT="%K{075}%F{black}⮀%k%f%K{075}%F{white} % INSERT %k%f%K{black}%F{075}⮀%k%f"
-    RPS1="${${KEYMAP/vicmd/$VIM_NORMAL}/(main|viins)/$VIM_INSERT}"
-    RPS2=$RPS1
     zle reset-prompt
 }
 zle -N zle-line-init
@@ -170,12 +166,6 @@ zle -N zle-keymap-select
 
 bindkey  -M viins 'jj' vi-cmd-mode
 export PATH="$PATH":~/.local/bin
-. "$HOME/.cargo/env"
-export PATH="$PATH":~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export FZF_DEFAULT_OPTS="--multi --height=60% --select-1 --exit-0 \
   --reverse --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up"
@@ -194,11 +184,8 @@ export FZF_CTRL_T_COMMAND="rg --files --hidden --no-heading -g '!{.git,node_modu
 export FZF_CTRL_T_OPTS=" \
 --preview ' \
     bat --color=always \
-      --theme="Nord" \
       --line-range :200 {}' \
 --preview-window 'down,60%,wrap,+3/2,~3'"
 
 export FZF_ALT_C_COMMAND="find ./ -type d \( -name '.git' -o -name 'node_modules' \) -prune -o -type d"
 export FZF_ALT_C_OPTS="--preview 'tree -aC -L 1 {} | head -200'"
-
-alias kindle='wine64 explorer /desktop=D,5120x2100 ~/.wine/drive_c/Program\ Files\ \(x86\)/Amazon/Kindle/Kindle.exe'
