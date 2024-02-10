@@ -3,25 +3,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# zplug
-source ~/.zplug/init.zsh
-
-zplug 'zsh-users/zsh-autosuggestions'
-zplug 'zsh-users/zsh-completions'
-zplug 'zsh-users/zsh-syntax-highlighting', defer:3
-zplug 'romkatv/powerlevel10k', as:theme, depth:1
-zplug 'chrissicool/zsh-256color'
-zplug 'zsh-users/zsh-history-substring-search'
-
-if ! zplug check --verbose; then
-  printf 'Install? [y/N]: '
-  if read -q; then
-    echo; zplug install
-  fi
-fi
-
-zplug load
-
 setopt histignorealldups sharehistory
 
 autoload -Uz colors
@@ -189,3 +170,21 @@ export FZF_CTRL_T_OPTS=" \
 
 export FZF_ALT_C_COMMAND="find ./ -type d \( -name '.git' -o -name 'node_modules' \) -prune -o -type d"
 export FZF_ALT_C_OPTS="--preview 'tree -aC -L 1 {} | head -200'"
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-completions
+zinit light zdharma/fast-syntax-highlighting
+zinit load zdharma/history-search-multi-word
+zinit light romkatv/powerlevel10k
+zinit light chrissicool/zsh-256color
+zinit light zsh-users/zsh-history-substring-search
