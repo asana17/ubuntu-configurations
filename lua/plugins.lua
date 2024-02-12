@@ -77,7 +77,8 @@ local plugins = {
 
   -- lsp
   { "neovim/nvim-lspconfig" }, -- official configuration
-  { "williamboman/mason.nvim", build = ":MasonUpdate" }, -- lsp server install helper
+  { "williamboman/mason.nvim" }, -- lsp server install helper, run :MasonUpdate
+
   { "williamboman/mason-lspconfig.nvim"}, -- package support above
   { "jose-elias-alvarez/null-ls.nvim",  dependencies = "nvim-lua/plenary.nvim"}, -- formatter and linter
   { "folke/neodev.nvim" }, -- neovim setup for luaAPI
