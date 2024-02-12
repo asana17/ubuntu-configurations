@@ -188,7 +188,6 @@ zinit light-mode for \
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light zdharma/fast-syntax-highlighting
-zinit load zdharma/history-search-multi-word
 zinit light romkatv/powerlevel10k
 zinit light chrissicool/zsh-256color
 zinit light zsh-users/zsh-history-substring-search
