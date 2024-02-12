@@ -84,7 +84,9 @@ local plugins = {
   { "folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 
   -- treesitter
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate",
+  { "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    build = ":TSInstall lua",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-refactor",
       "nvim-treesitter/nvim-treesitter-textobjects",
