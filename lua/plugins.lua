@@ -2,7 +2,7 @@ local plugins = {
   { "wbthomason/packer.nvim" }, -- manage plugins
   { "marko-cerovac/material.nvim" }, -- colorscheme theme
   { "nvim-lua/plenary.nvim" }, -- common util
-  { 'nvim-lualine/lualine.nvim', dependencies = { 'kyazdani42/nvim-web-devicons', lazy = true }}, -- status line
+  { 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true }}, -- status line
   { "MattesGroeger/vim-bookmarks"}, -- mark as bookmark
 
   -- search
