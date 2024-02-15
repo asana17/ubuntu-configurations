@@ -9,11 +9,12 @@ RUN useradd -m $USER && \
     usermod -u $UID $USER && \
     groupmod -g $GID $GROUP
 
-
+ENV TZ=Asia/Tokyo
 RUN apt-get update && \
     apt-get update && \
     apt-get install -y curl git ripgrep tar unzip wget sudo trash-cli\
     build-essential clang tmux zsh bat xsel python3-venv && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata && \
     ln -s /usr/bin/batcat /usr/bin/bat && \
     chsh -s /usr/bin/zsh $USER
 
@@ -45,6 +46,24 @@ ENV LC_ALL ja_JP.UTF-8
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
     apt-get install -y nodejs
 
+# Install ctags
+RUN  apt-get install -y \
+    gcc make \
+    pkg-config autoconf automake \
+    python3-docutils \
+    libseccomp-dev \
+    libjansson-dev \
+    libyaml-dev \
+    libxml2-dev &&\
+    git clone https://github.com/universal-ctags/ctags.git && \
+    cd ctags && \
+    ./autogen.sh && \
+    ./configure --prefix=/usr/local && \
+    make && \
+    make install && \
+    cd .. && \
+    rm -rf ctags
+
 USER $USER
 
 ENV HOME $USER_HOME
@@ -69,6 +88,6 @@ RUN git clone https://github.com/asana17/ubuntu-configurations.git && \
     rm -rf ~/ubuntu-configurations
 
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
-    ~/.fzf/install
+    echo y y y | ~/.fzf/install
 
 RUN ["/usr/bin/zsh", "-c", "export TERM=xterm-256color; source ~/.zshrc; vim +:MasonUpdate +:qall"]
