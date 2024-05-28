@@ -171,14 +171,21 @@ export FZF_CTRL_T_OPTS=" \
 export FZF_ALT_C_COMMAND="find ./ -type d \( -name '.git' -o -name 'node_modules' \) -prune -o -type d"
 export FZF_ALT_C_OPTS="--preview 'tree -aC -L 1 {} | head -200'"
 
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
 
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "${ZINIT_HOME}/zinit.zsh"
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
 zinit light-mode for \
     zdharma-continuum/zinit-annex-as-monitor \
     zdharma-continuum/zinit-annex-bin-gem-node \
@@ -191,3 +198,14 @@ zinit light zdharma/fast-syntax-highlighting
 zinit light romkatv/powerlevel10k
 zinit light chrissicool/zsh-256color
 zinit light zsh-users/zsh-history-substring-search
+### End of Zinit's installer chunk
+
+alias tl='/usr/bin/tmux list-sessions'
+alias ta="/usr/bin/tmux attach-session -t"
+function tmux-on-directory() {
+  (cd ./$1 || exit; /usr/bin/tmux)
+}
+alias tmux=tmux-on-directory
+
+# online-judge-tools test. To submit, use acc s
+alias ojt='g++ main.cpp && oj t -N -d ./tests'
