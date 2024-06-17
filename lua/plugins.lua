@@ -1,5 +1,4 @@
 local plugins = {
-  { "wbthomason/packer.nvim" }, -- manage plugins
   { "marko-cerovac/material.nvim" }, -- colorscheme theme
   { "nvim-lua/plenary.nvim" }, -- common util
   { 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true }}, -- status line
@@ -40,7 +39,7 @@ local plugins = {
   { "unblevable/quick-scope" }, -- highlight unique character in line
 
   -- git
-  { "airblade/vim-gitgutter" }, -- show git status in LineNr
+  --{ "airblade/vim-gitgutter" }, -- show git status in LineNr
   { "tpope/vim-fugitive" }, -- run git comannd on vim command
   { "lewis6991/gitsigns.nvim" }, -- show git status
   { "ruanyl/vim-gh-line" }, -- go to github page
@@ -77,17 +76,14 @@ local plugins = {
 
   -- lsp
   { "neovim/nvim-lspconfig" }, -- official configuration
-  { "williamboman/mason.nvim" }, -- lsp server install helper, run :MasonUpdate
-
+  { "williamboman/mason.nvim", build = ":MasonUpdate" }, -- lsp server install helper
   { "williamboman/mason-lspconfig.nvim"}, -- package support above
   { "jose-elias-alvarez/null-ls.nvim",  dependencies = "nvim-lua/plenary.nvim"}, -- formatter and linter
   { "folke/neodev.nvim" }, -- neovim setup for luaAPI
   { "folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 
   -- treesitter
-  { "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    build = ":TSInstall lua",
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-refactor",
       "nvim-treesitter/nvim-treesitter-textobjects",
@@ -121,24 +117,6 @@ local plugins = {
 
   -- others
   {"norcalli/nvim-colorizer.lua"}, -- highlight rgb colors
-
-}
-
-local opts = {
-  performance = {
-    rtp = {
-      disabled_plugins = {
-        'gzip',
-        'matchit',
-        --'matchparen',
-        --'netrwPlugin',
-        'tarPlugin',
-        'tohtml',
-        'tutor',
-        'zipPlugin',
-      },
-    },
-  },
 }
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
