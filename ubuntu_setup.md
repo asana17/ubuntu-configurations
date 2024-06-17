@@ -12,6 +12,7 @@
 1. ripgrep
 1. trash-cli (apt)
 1. nemo
+1. fd
 
 ## terminal
 ### tilix
@@ -85,6 +86,12 @@ ln -s /usr/bin/batcat ~/.local/bin/bat
 ### ripgrep
 ```
 sudo apt install ripgrep
+```
+
+### fd
+
+```
+sudo apt install fd-find
 ```
 
 ## UI

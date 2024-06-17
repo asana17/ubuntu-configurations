@@ -76,14 +76,14 @@ local plugins = {
 
   -- lsp
   { "neovim/nvim-lspconfig" }, -- official configuration
-  { "williamboman/mason.nvim", build = ":MasonUpdate" }, -- lsp server install helper
+  { "williamboman/mason.nvim"}, -- lsp server install helper
   { "williamboman/mason-lspconfig.nvim"}, -- package support above
   { "jose-elias-alvarez/null-ls.nvim",  dependencies = "nvim-lua/plenary.nvim"}, -- formatter and linter
   { "folke/neodev.nvim" }, -- neovim setup for luaAPI
   { "folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 
   -- treesitter
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate",
+  { "nvim-treesitter/nvim-treesitter", build ={":TSUpdate",":TSInstall c lua vim"},
     dependencies = {
       "nvim-treesitter/nvim-treesitter-refactor",
       "nvim-treesitter/nvim-treesitter-textobjects",
@@ -117,7 +117,28 @@ local plugins = {
 
   -- others
   {"norcalli/nvim-colorizer.lua"}, -- highlight rgb colors
+
+  -- my plugin
+  {"asana17/prev-mark.nvim"}, -- preview markdown
 }
+
+local opts = {
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        'gzip',
+        'matchit',
+        --'matchparen',
+        --'netrwPlugin',
+        'tarPlugin',
+        'tohtml',
+        'tutor',
+        'zipPlugin',
+      },
+    },
+  },
+}
+
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

@@ -13,9 +13,10 @@ ENV TZ=Asia/Tokyo
 RUN apt-get update && \
     apt-get update && \
     apt-get install -y curl git ripgrep tar unzip wget sudo trash-cli\
-    build-essential clang tmux zsh bat xsel python3-venv && \
+    build-essential clang tmux zsh bat xsel python3-venv fd-find && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata && \
     ln -s /usr/bin/batcat /usr/bin/bat && \
+    ln  -s $(which fdfind) /usr/bin/fd && \
     chsh -s /usr/bin/zsh $USER
 
 ARG USER_HOME="/home/$USER"
@@ -24,7 +25,7 @@ RUN mkdir -p $USER_HOME && \
     echo "$USER ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Install nvim
-RUN wget https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz && \
+RUN wget https://github.com/neovim/neovim/releases/download/v0.10.0/nvim-linux64.tar.gz && \
     tar -zxvf nvim-linux64.tar.gz && \
     mv nvim-linux64/bin/nvim usr/bin/nvim && \
     mv nvim-linux64/lib/nvim usr/lib/nvim && \

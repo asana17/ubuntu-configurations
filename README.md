@@ -3,7 +3,7 @@ My ubuntu configuration files for zsh, vim, and so on.
 
 Read [ubuntu_setup.md](./ubuntu_setup.md) for more info.
 
-# Auto install
+# Bash script for automation
 
 You can automatically install all settings with [./scripts/ubuntu_setup.sh](./scripts/ubuntu_setup.sh).
 
@@ -19,21 +19,6 @@ If you want to install nerd-fonts automatically, add `--nerd-fonts` option.
 
 This adds long configuring time because all of the fonts are downloaded by this option.
 
-
-## Test for auto install
-This script is tested in `ubuntu:20.04` docker container. [./dockerfiles/test.Dockerfile](./dockerfiles/test.Dockerfile).
-
-```
-docker build -t vanilla_ubuntu ./scripts -f ./dockerfiles/test.Dockerfile --no-cache # specify folder of ubuntu_setup.sh
-docker run -it --net host -e DISPLAY=$DISPLAY -v $HOME/.Xauthority:/root/.Xauthority --name van vanilla_ubuntu:latest env TERM=xterm-256color /usr/bin/bash
-./ubuntu_setup.sh # in docker container
-```
-
-**Use pre-configured container in [Create Docker container](#create-docker-container) for normal usage.**
-
-## TODO
-- Install ctags automatically
-
 <a id="create-docker-container"></a>
 # Create Docker container
 
@@ -41,14 +26,63 @@ docker run -it --net host -e DISPLAY=$DISPLAY -v $HOME/.Xauthority:/root/.Xautho
 
 This Dockerfile is based on `ubuntu:20.04.`
 
+## Use Makefile to create Docker container
+
+To build image and run container, do:
+
 ```
-docker build -t <image_name> . -f dockerfiles/Dockerfile
-docker run -it --net host -e DISPLAY=$DISPLAY -v $HOME/.Xauthority:/root/.Xauthority --name <container_name> <image_name>:latest env TERM=xterm-256color /usr/bin/zsh
+cd ./dockerfiles
+make
 ```
 
-After exit:
+or
+
 ```
-docker restart <container_name>
+make OPTS=--no-cache
+```
+
+To start zsh in the container, do:
+
+```
+make docker-exec
+```
+
+To delete container, do:
+```
+make clean
+```
+
+To delete container and image, do:
+
+```
+make mrproper
+```
+
+## Manual build and run
+
+
+To build image and run container, do:
+
+```
+docker build -t <image_name> . -f dockerfiles/Dockerfile
+docker run -dit --net host -e DISPLAY=$DISPLAY -e TERM=xterm-256color -v $HOME/.Xauthority:/root/.Xauthority --name <container_name> <image_name>:latest
+```
+
+To exec zsh in the container, do:
+
+```
 docker exec -it <container_name> /usr/bin/zsh
-docker stop <container_name> # when work finished
+```
+
+
+# Test for automation script
+
+**Please use pre-configured container in [Create Docker container](#create-docker-container) for normal usage.**
+
+The automation script is tested in `ubuntu:20.04` docker container. [./dockerfiles/test.Dockerfile](./dockerfiles/test.Dockerfile).
+
+```
+docker build -t vanilla_ubuntu ./scripts -f ./dockerfiles/test.Dockerfile --no-cache # specify folder of ubuntu_setup.sh
+docker run -it --net host -e DISPLAY=$DISPLAY -e TERM=xterm-256color -v $HOME/.Xauthority:/root/.Xauthority --name van vanilla_ubuntu:latest /usr/bin/bash
+./ubuntu_setup.sh # in docker container
 ```
