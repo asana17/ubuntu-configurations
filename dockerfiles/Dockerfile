@@ -80,13 +80,26 @@ RUN git clone https://github.com/asana17/ubuntu-configurations.git && \
     cp ~/ubuntu-configurations/init.lua ~/.config/nvim/ && \
     cp -r ~/ubuntu-configurations/lua ~/.config/nvim/ && \
     cp -r ~/ubuntu-configurations/plugin ~/.config/nvim/ && \
+    rm -rf ~/ubuntu-configurations && \
     sed -i \
     "0,/typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_{CONTENT,VISUAL_IDENTIFIER}_EXPANSION/s//  # &/" \
     ~/.p10k.zsh && \
     sed -i \
     "0,/POWERLEVEL9K_CONTEXT_PREFIX.*/s//&\n  typeset -g POWERLEVEL9K_CONTEXT_SUFFIX=':🐳 ${DOCKER_CONTAINER_NAME}'/" \
     ~/.p10k.zsh && \
-    rm -rf ~/ubuntu-configurations
+    cat <<EOF > ~/.config/nvim/plugin/prev-mark.lua
+    require("prev-mark").setup(
+      {
+        server = {
+          port = 8001,
+        },
+        preview = {
+          open_browser = false,
+          show_url = true,
+        },
+      }
+    )
+EOF
 
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
     echo y y y | ~/.fzf/install
