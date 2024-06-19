@@ -145,7 +145,6 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-bindkey  -M viins 'jj' vi-cmd-mode
 export PATH="$PATH":~/.local/bin
 
 export FZF_DEFAULT_OPTS="--multi --height=60% --select-1 --exit-0 \
@@ -200,12 +199,14 @@ zinit light chrissicool/zsh-256color
 zinit light zsh-users/zsh-history-substring-search
 ### End of Zinit's installer chunk
 
-alias tl='/usr/bin/tmux list-sessions'
-alias ta="/usr/bin/tmux attach-session -t"
+alias tl='tmux list-sessions'
+alias ta="tmux attach-session -t"
 function tmux-on-directory() {
-  (cd ./$1 || exit; /usr/bin/tmux)
+  (cd ./$1 || exit; tmux)
 }
-alias tmux=tmux-on-directory
+alias td=tmux-on-directory
+
+alias cp="cp -r"
 
 # online-judge-tools test. To submit, use acc s
 alias ojt='g++ main.cpp && oj t -N -d ./tests'
