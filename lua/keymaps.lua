@@ -13,9 +13,6 @@ local keymap = vim.api.nvim_set_keymap
 -- Do not yank with x
 keymap("n", "x", '"_x', opts)
 
--- exit insert mode with jj
-keymap("i", "jj", "<Esc>", opts)
-
 -- remove highlight with esc esc
 keymap("n", "<Esc><Esc>", ":<C-u>set nohlsearch<Return>", opts)
 
@@ -26,5 +23,5 @@ keymap("i", ",", ",<Space>", opts)
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
--- exit terminal insert mode with esc
-keymap("t", "<Esc>", "<C-\\><c-n>", {silent = true})
+-- exit terminal insert mode with jj
+keymap("t", "jj", "<C-\\><c-n>", {silent = true})
