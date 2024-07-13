@@ -26,7 +26,6 @@ non_interactive_pkg_install() {
 }
 
 dotfiles_setup() {
-  git clone https://github.com/asana17/ubuntu-configurations.git
 
   mkdir -p ${HOME}/.config/nvim && \
     cp ${HOME}/ubuntu-configurations/.zshrc ${HOME}/.zshrc && \
@@ -35,8 +34,6 @@ dotfiles_setup() {
     cp ${HOME}/ubuntu-configurations/init.lua ${HOME}/.config/nvim/ && \
     cp -r ${HOME}/ubuntu-configurations/lua ${HOME}/.config/nvim/ && \
     cp -r ${HOME}/ubuntu-configurations/plugin ${HOME}/.config/nvim/
-
-  rm -rf ${HOME}/ubuntu-configurations
 }
 
 terminal_padding() {
