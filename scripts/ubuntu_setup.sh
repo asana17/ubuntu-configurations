@@ -79,7 +79,7 @@ nemo_install() {
 neovim_install() {
     pkg_install xsel xclip
 
-    wget https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz
+    wget https://github.com/neovim/neovim/releases/download/v0.10.0/nvim-linux64.tar.gz
     tar -zxvf nvim-linux64.tar.gz
     local nvim_bin_path="${HOME}/.local/bin/nvim"
     mkdir -p ${HOME}/.local/bin
