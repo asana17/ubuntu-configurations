@@ -11,11 +11,12 @@ local plugins = {
     dependencies = {
       "kevinhwang91/nvim-hlslens",
       "lewis6991/gitsigns.nvim",
-    }
+    },
+    lazy = true,
   },
 
   -- telescope
-  { "nvim-telescope/telescope.nvim", version = "0.1.2" },
+  { "nvim-telescope/telescope.nvim", version = "0.1.2", lazy = true },
 
   -- text editing
   { "rhysd/accelerated-jk" }, -- faster j/k scroll
@@ -55,14 +56,14 @@ local plugins = {
   },
 
   -- syntax
-  { "preservim/tagbar" }, -- open code objects list window
+  { "preservim/tagbar", lazy = true }, -- open code objects list window
   { "LeafCage/vimhelpgenerator" }, -- syntax highlight logs
   { "rhysd/vim-grammarous" }, -- grammar check: to fix bug temporaliy, need to delete vim-grammarous/autoload/grammarous.vim L698: "call grammarous#info_win#close()
 
   -- completion
   { "hrsh7th/nvim-cmp" },
   { "hrsh7th/cmp-nvim-lsp" },
-  { "hrsh7th/vim-vsnip" },
+  { "hrsh7th/vim-vsnip", lazy = true },
   { "hrsh7th/cmp-path" },
   { "hrsh7th/cmp-buffer" },
   { "hrsh7th/cmp-cmdline"},
@@ -70,14 +71,15 @@ local plugins = {
     dependencies = {
       "saadparwaiz1/cmp_luasnip",
       "honza/vim-snippets",
-    }
+    },
+    lazy = true
   },
   { "petertriho/cmp-git", dependencies = "nvim-lua/plenary.nvim" },
 
   -- lsp
   { "neovim/nvim-lspconfig" }, -- official configuration
-  { "williamboman/mason.nvim"}, -- lsp server install helper
-  { "williamboman/mason-lspconfig.nvim"}, -- package support above
+  { "williamboman/mason.nvim", lazy = true}, -- lsp server install helper
+  { "williamboman/mason-lspconfig.nvim", lazy = true}, -- package support above
   { "jose-elias-alvarez/null-ls.nvim",  dependencies = "nvim-lua/plenary.nvim"}, -- formatter and linter
   { "folke/neodev.nvim" }, -- neovim setup for luaAPI
   { "folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
@@ -113,7 +115,7 @@ local plugins = {
   { "previm/previm" }, -- preview markdown on browser with Ctrl-P
 
   -- latex
-  { "vim-latex/vim-latex", version = "*" },
+  { "vim-latex/vim-latex", version = "*", lazy = true},
 
   -- others
   {"norcalli/nvim-colorizer.lua"}, -- highlight rgb colors
