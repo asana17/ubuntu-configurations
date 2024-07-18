@@ -11,7 +11,7 @@ RUN useradd -m $USER && \
     groupmod -g $GID $GROUP
 
 RUN apt-get update && \
-    apt-get install -y sudo
+    apt-get install -y sudo git
 
 RUN apt-get install -y locales && \
     locale-gen ja_JP.UTF-8
@@ -26,10 +26,10 @@ RUN mkdir -p $USER_HOME && \
     chown -R $UID:$GID $USER_HOME && \
     echo "$USER ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-ADD ubuntu_setup.sh $USER_HOME/ubuntu_setup.sh
-RUN chown $USER:$USER $USER_HOME/ubuntu_setup.sh && \
-    chmod +x $USER_HOME/ubuntu_setup.sh
 
 USER $USER
 ENV HOME $USER_HOME
+
 WORKDIR $HOME
+RUN git clone https://www.github.com/asana17/ubuntu-configurations.git && \
+  chown +x ubuntu-configurations/scripts/ubuntu_setup.sh
