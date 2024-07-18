@@ -125,20 +125,6 @@ tilix_install() {
   fi
 }
 
-tmux_install() {
-    pkg_install make libevent-dev
-    wget https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz
-    tar -zxvf tmux-3.3a.tar.gz
-    cd tmux-3.3a
-    ./configure
-    make && sudo make install
-    sudo ln -s /usr/local/bin/tmux /usr/bin/tmux
-    if ! command -v tmux &> /dev/null; then
-      error "tmux" "tmux not found in /usr/local/bin/tmux"
-    fi
-    cd ..
-}
-
 zsh_install() {
   pkg_install zsh
   zsh -c "source ~/.zshrc; exit"
@@ -174,13 +160,12 @@ done
 sudo apt-get update
 
 pkg_install curl git ripgrep tar unzip wget trash-cli \
-  build-essential python3-venv python3-pip clang
+  build-essential python3-venv python3-pip clang tmux
 
 non_interactive_pkg_install tzdata
 
 node_install
 
-copy dotfiles from github
 dotfiles_setup
 
 terminal_padding
@@ -192,8 +177,6 @@ zsh_install
 fzf_install
 
 neovim_install
-
-tmux_install
 
 chrome_install
 tilix_install
