@@ -1,12 +1,12 @@
 -- open fern
 vim.cmd [[
   let g:fern#default_hidden=1
-  command! -nargs=* E Fern . -reveal=%:p
+  command! -nargs=* E Fern .
 ]]
 
 -- vsplit with fern
 vim.cmd [[
-  command! -nargs=* VS vsplit | Fern . -reveal=%:p
+  command! -nargs=* VS vsplit | wincmd l | Fern . -reveal=%
   cabbrev vs VS
 ]]
 

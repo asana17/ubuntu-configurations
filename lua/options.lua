@@ -1,6 +1,6 @@
 local options = {
-  encoding = "utf-8",
-  fileencoding = "utf-8",
+  encoding="utf-8",
+  fileencoding="utf-8",
   number = true,
   mouse = "a",
   shiftwidth = 2,
