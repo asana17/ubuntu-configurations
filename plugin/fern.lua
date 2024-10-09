@@ -6,7 +6,7 @@ vim.cmd [[
 
 -- vsplit with fern
 vim.cmd [[
-  command! -nargs=* VS vsplit | wincmd l | Fern . -reveal=%
+  command! -nargs=* VS vert botright split | Fern . -reveal=%
   cabbrev vs VS
 ]]
 
