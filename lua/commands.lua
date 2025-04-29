@@ -16,10 +16,11 @@ vim.cmd "command! -nargs=* T split | wincmd j | resize 15 | terminal <args>"
 
 
 -- start terminal with insert mode
-autocmd("TermOpen", {
-  pattern = "*",
-  command = "startinsert",
-})
+-- comment out because this cause nvim-dap being put into insert mode
+-- autocmd("TermOpen", {
+--  pattern = "*",
+--  command = "startinsert",
+--})
 
 -- remove whitespace on save
 autocmd("BufWritePre", {
@@ -33,15 +34,16 @@ autocmd("BufEnter", {
   command = "set fo-=c fo-=r fo-=o",
 })
 
--- restore cursor
-autocmd({ "BufReadPost" }, {
-  pattern = { "*" },
-  callback = function()
-    vim.api.nvim_exec('silent! normal! g`"zv', false)
-  end,
-})
+--[[ -- restore cursor ]]
+--[[ autocmd({ "BufReadPost" }, { ]]
+--[[   pattern = { "*" }, ]]
+--[[   callback = function() ]]
+--[[     vim.api.nvim_exec('silent! normal! g`"zv', false) ]]
+--[[     vim.api.nvim_exec('silent! normal! zz', false) ]]
+--[[   end, ]]
+--[[ }) ]]
 
-autocmd({ "BufWritePost","BufEnter" }, {
+autocmd({ "BufEnter" }, {
   pattern = {"*"},
   command = "set nofoldenable foldmethod=manual foldlevelstart=99",
 })

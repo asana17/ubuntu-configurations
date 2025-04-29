@@ -78,6 +78,8 @@ material.setup({
       IncSearch = {fg = '#ffffff', underline = true},
       QuickFixLine = {fg = '#ffffff', underline = true},
       Folded = {fg = '#aaaaaa', italic = true},
+      FloatBorder = {fg = '#ffffff'},
+      CurSearch = {fg = '#000000', bg = "#ffcb6b"},
       ["@attribute"] = {fg = '#60f3c2'},
       ["@storageclass"] = {fg = '#a081ff'},
       ["@constant.builtin"] = {fg = '#ff7c3c'},

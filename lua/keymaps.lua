@@ -25,3 +25,10 @@ keymap("v", ">", ">gv", opts)
 
 -- exit terminal insert mode with jj
 keymap("t", "jj", "<C-\\><c-n>", {silent = true})
+
+-- telescope
+vim.keymap.set('n', '<leader>lg', require('telescope.builtin').live_grep)
+vim.keymap.set('n', 'ca', vim.lsp.buf.code_action)
+
+-- flutter
+vim.keymap.set('n', '<leader>fl', require('telescope').extensions.flutter.commands)

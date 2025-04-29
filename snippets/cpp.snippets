@@ -19,54 +19,6 @@ snippet binc
 	#include <boost/${1:shared_ptr}.hpp>
 ##
 ## STL Collections
-# std::array
-snippet array
-	std::array<${1:T}, ${2:N}> ${3};
-# std::vector
-snippet vector
-	std::vector<${1:T}> ${2};
-# std::deque
-snippet deque
-	std::deque<${1:T}> ${2};
-# std::forward_list
-snippet flist
-	std::forward_list<${1:T}> ${2};
-# std::list
-snippet list
-	std::list<${1:T}> ${2};
-# std::set
-snippet set
-	std::set<${1:T}> ${2};
-# std::map
-snippet map
-	std::map<${1:Key}, ${2:T}> ${3};
-# std::multiset
-snippet mset
-	std::multiset<${1:T}> ${2};
-# std::multimap
-snippet mmap
-	std::multimap<${1:Key}, ${2:T}> ${3};
-# std::unordered_set
-snippet uset
-	std::unordered_set<${1:T}> ${2};
-# std::unordered_map
-snippet umap
-	std::unordered_map<${1:Key}, ${2:T}> ${3};
-# std::unordered_multiset
-snippet umset
-	std::unordered_multiset<${1:T}> ${2};
-# std::unordered_multimap
-snippet ummap
-	std::unordered_multimap<${1:Key}, ${2:T}> ${3};
-# std::stack
-snippet stack
-	std::stack<${1:T}> ${2};
-# std::queue
-snippet queue
-	std::queue<${1:T}> ${2};
-# std::priority_queue
-snippet pqueue
-	std::priority_queue<${1:T}> ${2};
 ##
 ## STL smart pointers
 # std::shared_ptr
@@ -193,6 +145,10 @@ snippet cca
 #		${4}
 #	}
 #
+snippet forj
+	for (int ${1:j} = ${2:0}; $1 < ${3:length}; $1${4:++}) {
+		${5}
+	}
 # foreach
 snippet for
 	for (${1:auto} ${2:i} : ${3:container}) {
@@ -211,7 +167,7 @@ snippet itera
 	}
 ##
 ## Lambdas
-# lamda (one line)
+# lambda (one line)
 snippet ld
 	[${1}](${2}){${3}};
 # lambda (multi-line)
@@ -232,3 +188,32 @@ snippet af auto function
 	{
 		${0}
 	};
+
+# comp prog
+## vector
+snippet vec
+	vector<${1:type}> $2
+## priority queue
+snippet pq
+	// ascending order, {0, 1, 2, 3, 4}, 0 will be popped first
+	priority_queue<${1:type}, vector<$1>, greater<$1>> pq;
+## comparator
+snippet pqdecl
+	// priority_queue of ${1:type}
+	auto comparison = []($1& a, $1& b){
+		// smaller first
+		return a > b;
+	};
+	priority_queue<$1, vector<$1>, decltype(comparison)> pq(comparison);
+## pair priority queue
+snippet ppq
+	// priority_queue of pair<${1:type}, ${2:type}>
+	// ascending order of second elem, greater will be last, smaller popped first
+	auto comparison = [](pair<$1, $2>& a, pair<$1, $2>& b){
+		// smaller be first, greater be last
+		if(a.second == b.second) {
+			return a.first > b.first;
+		}
+		return a.second > b.second;
+	};
+	priority_queue<pair<$1, $2>, vector<pair<$1, $2>>, decltype(comparison)> pq(comparison);

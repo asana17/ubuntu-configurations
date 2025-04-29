@@ -64,7 +64,7 @@ snippet ecl "extern crate log"
 	#[macro_use]
 	extern crate log;
 snippet mod
-	mod ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} {
+	${2}mod ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} {
 		${0}
 	} /* $1 */
 # Testing
@@ -91,9 +91,9 @@ snippet allow "allow lint attribute" b
 	#[allow(${1:unused_variables})]
 snippet cfg "cfg attribute" b
 	#[cfg(${1:target_os = "linux"})]
-snippet feat "feature attribute" b
+snippet featture "feature attribute" b
 	#![feature(${1:plugin})]
-snippet der "#[derive(..)]" b
+snippet derive "#[derive(..)]" b
 	#[derive(${1:Debug})]
 snippet attr "#[..]" b
 	#[${1:inline}]
@@ -164,8 +164,8 @@ snippet todo "TODO comment"
 snippet fixme "FIXME comment"
 	// FIXME: $0
 # Struct
-snippet st "Struct definition"
-	struct ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} {
+snippet struct "Struct definition"
+	${2}struct ${1:`substitute(vim_snippets#Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} {
 		${0}
 	}
 snippet impl "Struct/Trait implementation"
@@ -194,7 +194,7 @@ snippet penum "pub enum definition"
 	}
 # Traits
 snippet trait "Trait definition"
-	trait ${1:Name} {
+	${2}trait ${1:Name} {
 		${0}
 	}
 snippet drop "Drop trait implementation (destructor)"

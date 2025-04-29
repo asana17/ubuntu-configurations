@@ -8,8 +8,6 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
 
-require("neodev").setup()
-
 require("mason-lspconfig").setup_handlers {
   function(server_name)
     require("lspconfig")[server_name].setup {

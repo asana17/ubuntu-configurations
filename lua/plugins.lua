@@ -44,7 +44,7 @@ local plugins = {
   { "tpope/vim-fugitive" }, -- run git comannd on vim command
   { "lewis6991/gitsigns.nvim" }, -- show git status
   { "ruanyl/vim-gh-line" }, -- go to github page
-  { "rhysd/committia.vim" }, -- improve git editor window
+  --{ "rhysd/committia.vim" }, -- improve git editor window
 
   -- fern file tree viewer
   { "lambdalisue/fern.vim",
@@ -61,7 +61,28 @@ local plugins = {
   { "rhysd/vim-grammarous" }, -- grammar check: to fix bug temporaliy, need to delete vim-grammarous/autoload/grammarous.vim L698: "call grammarous#info_win#close()
 
   -- completion
-  { "hrsh7th/nvim-cmp", commit=b356f2c },
+  --{ "hrsh7th/nvim-cmp", commit=b356f2c },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
+  { -- optional cmp completion source for require statements and module annotations
+    "hrsh7th/nvim-cmp",
+    opts = function(_, opts)
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, {
+        name = "lazydev",
+        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+      })
+    end,
+  },
   { "hrsh7th/cmp-nvim-lsp" },
   { "hrsh7th/vim-vsnip" },
   { "hrsh7th/cmp-path" },
@@ -79,8 +100,32 @@ local plugins = {
   { "neovim/nvim-lspconfig" }, -- official configuration
   { "williamboman/mason.nvim"}, -- lsp server install helper
   { "williamboman/mason-lspconfig.nvim"}, -- package support above
-  { "folke/neodev.nvim" }, -- neovim setup for luaAPI
+  --{ "folke/neodev.nvim" }, -- neovim setup for luaAPI
   { "folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+
+  -- dap
+  { "mfussenegger/nvim-dap" }, -- debug adapter manager
+  { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }, -- debugger ui
+
+  --test
+  { "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter"
+    }
+  }, -- interact test
+  { "nvim-neotest/neotest-go"},
+  { "nvim-neotest/neotest-plenary"},
+  { "nvim-neotest/neotest-python"},
+  { "nvim-neotest/neotest-vim-test"},
+  {
+    'andythigpen/nvim-coverage',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+	}, -- show if function is tested
 
   -- treesitter
   { "nvim-treesitter/nvim-treesitter", build ={":TSUpdate",":TSInstall c lua vim"},
@@ -95,6 +140,16 @@ local plugins = {
 
   -- github copilot
   { "github/copilot.vim" },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "github/copilot.vim" },
+      { "nvim-lua/plenary.nvim", branch = "master" },
+    },
+    build = "make tiktoken",
+    opts = {
+    },
+  },
 
   -- runner
   { "michaelb/sniprun", build = "bash ./install.sh" }, -- run visual snipped code
@@ -108,18 +163,40 @@ local plugins = {
   { "simrat39/rust-tools.nvim" },
 
   -- markdown
-  { "preservim/vim-markdown" }, -- markdown syntax highlightning and extensions
+  { "preservim/vim-markdown" }, -- markdown syntax highlighting and extensions
   { "mattn/vim-maketable" }, -- make table easily
   { "previm/previm" }, -- preview markdown on browser with Ctrl-P
+  {
+    "hedyhli/markdown-toc.nvim",
+    ft = "markdown",
+    cmd = {"Mtoc"},
+    main = "mtoc",
+  }, -- make table of contents
 
   -- latex
   { "vim-latex/vim-latex", version = "*" },
+
+  -- flutter
+  {
+    'nvim-flutter/flutter-tools.nvim',
+    lazy = false,
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+        'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
+    config = true,
+  },
 
   -- others
   {"norcalli/nvim-colorizer.lua"}, -- highlight rgb colors
 
   -- my plugin
   {"asana17/prev-mark.nvim"}, -- preview markdown
+  {"commit-buf.nvim", dir = "~/commit-buf.nvim",
+   dependencies = "nvim-lua/plenary.nvim" }, -- improve commitbuf
+  --{"super-commit.nvim", dir = "~/super-commit.nvim",
+   --dependencies = "nvim-lua/plenary.nvim" }, -- improve commitbuf
+
 }
 
 local opts = {
@@ -153,4 +230,4 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup(plugins,opts)
+require("lazy").setup(plugins, opts)
