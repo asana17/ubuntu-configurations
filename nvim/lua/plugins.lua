@@ -192,11 +192,8 @@ local plugins = {
 
   -- my plugin
   {"asana17/prev-mark.nvim"}, -- preview markdown
-  {"commit-buf.nvim", dir = "~/commit-buf.nvim",
-   dependencies = "nvim-lua/plenary.nvim" }, -- improve commitbuf
-  --{"super-commit.nvim", dir = "~/super-commit.nvim",
-   --dependencies = "nvim-lua/plenary.nvim" }, -- improve commitbuf
-
+  {"asana17/commit-buf.nvim",
+   dependencies = "nvim-lua/plenary.nvim"}, -- improve commitbuf
 }
 
 local opts = {

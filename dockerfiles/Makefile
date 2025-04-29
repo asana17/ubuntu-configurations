@@ -22,7 +22,8 @@ help:
 .${IMAGE}: Dockerfile
 	docker build -t ${IMAGE} -f Dockerfile . ${OPT} \
 		--build-arg UID=$(shell id -u) \
-		--build-arg GID=${shell id -g}
+		--build-arg GID=${shell id -g} \
+		${OPT}
 	touch $@
 
 ${IMAGE}: .${IMAGE}
