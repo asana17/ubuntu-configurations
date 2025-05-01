@@ -12,6 +12,14 @@ You can automatically install all settings with [ubuntu_configuration.sh](ubuntu
 ./ubuntu_configuration.sh
 ```
 
+## GitHub codespaces
+
+You can use [./setup.sh](./setup.sh) to set up your environment in GitHub codespaces.
+
+```
+./setup.sh
+```
+
 ## Docker container
 
 [./dockerfiles/Dockerfile](./dockerfiles/Dockerfile) can be used to create docker image with these configs.

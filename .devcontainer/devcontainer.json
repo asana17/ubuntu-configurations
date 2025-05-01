@@ -1,0 +1,4 @@
+{
+  "name": "My Codespace",
+  "image": "mcr.microsoft.com/devcontainers/universal:latest",
+}
