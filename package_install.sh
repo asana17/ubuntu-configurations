@@ -11,18 +11,18 @@ error() {
 }
 
 check_install() {
-    if [ ${#FAILED_PKGS[@]} -gt 0 ]; then
-        echo "The following packages failed to install:"
-        printf "%s\n" "${FAILED_PKGS[@]}"
-    fi
+  if [ ${#FAILED_PKGS[@]} -gt 0 ]; then
+      echo "The following packages failed to install:"
+      printf "%s\n" "${FAILED_PKGS[@]}"
+  fi
 }
 
 pkg_install() {
-    sudo apt-get install -y "$@" || FAILED_PKGS+=("$@")
+  sudo apt-get install -y "$@" || FAILED_PKGS+=("$@")
 }
 
 non_interactive_pkg_install() {
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y "$@" || FAILED_PKGS+=("$@")
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y "$@" || FAILED_PKGS+=("$@")
 }
 
 bat_install() {
