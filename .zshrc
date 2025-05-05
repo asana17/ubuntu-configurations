@@ -202,7 +202,7 @@ zinit light zsh-users/zsh-history-substring-search
 alias tl='tmux list-sessions'
 alias ta="tmux attach-session -t"
 function tmux-on-directory() {
-  (cd ./$1 || exit; tmux)
+  (cd $1 || exit; tmux)
 }
 alias td=tmux-on-directory
 
