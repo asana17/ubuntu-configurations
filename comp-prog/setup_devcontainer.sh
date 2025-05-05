@@ -12,7 +12,7 @@ npm install -g atcoder-cli
 pip3 install online-judge-tools
 
 mkdir -p ~/.config/atcoder-cli-nodejs
-cp ${SCRIPT_DIR}/atcoder/* ~/.config/atcoder-cli-nodejs/*
+cp -r ${SCRIPT_DIR}/atcoder/* ~/.config/atcoder-cli-nodejs/*
 
 # setup vscode
 cp ${SCRIPT_DIR}/../.devcontainer/vscode/* ~/.vscode-remote/data/Machine/
