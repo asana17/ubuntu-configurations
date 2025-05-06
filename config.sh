@@ -44,10 +44,10 @@ fzf_install() {
 }
 
 nerdfonts_install(){
-  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Hack.zip
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip
   mkdir -p ~/.local/share/fonts
-  unzip Hack.zip -d ~/.local/share/fonts
-  rm Hack.zip
+  unzip FiraCode.zip -d ~/.local/share/fonts
+  rm FiraCode.zip
   fc-cache -fv
 }
 

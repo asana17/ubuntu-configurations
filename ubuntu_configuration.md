@@ -114,3 +114,76 @@ ln -s /usr/bin/batcat ~/.local/bin/bat
 
 fix misalignment of windows time when dualboot
 `timedatectl set-local-rtc 1`
+
+
+## i3
+
+```
+sudo apt install i3
+```
+
+select i3 as a window manager in login screen
+
+```
+sudo apt install i3lock
+```
+
+`i3lock` to lock screen, input password to unlock
+
+### transparency
+
+```
+sudo apt install picom
+```
+
+### display layout
+
+```
+sudo apt install arandr
+```
+
+
+save the display layout after confgurating in GUI
+
+```
+arandr
+```
+
+### wall paper
+
+```
+sudo apt install feh
+```
+
+set background by
+
+```
+feh -Zr ~/Pictures
+```
+
+### screen capture
+
+```
+sudo apt install scrot
+```
+
+## fcitx
+
+```
+sudo apt install fcitx fcitx-mozc
+```
+
+```
+echo "export DEFAULT_INPUT_METHOD=fcitx" >> ~/.profile
+echo "export GTK_IM_MODULE=fcitx" >> ~/.profile
+echo "export QT_IM_MODULE=fcitx" >> ~/.profile
+echo "export XMODIFIERS=@im=fcitx" >> ~/.profile
+```
+
+and then run
+
+```
+fcitx-config-gtk3
+```
+
+to add mozc to input method

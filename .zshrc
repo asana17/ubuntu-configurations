@@ -210,3 +210,5 @@ alias cp="cp -r"
 
 # online-judge-tools test. To submit, use acc s
 alias ojt='g++ main.cpp && oj t -N -d ./tests'
+
+alias i3lock="i3lock -c 000000"
