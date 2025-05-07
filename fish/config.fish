@@ -26,8 +26,13 @@ if status is-interactive
         cd $abs_dir
         tmux
     end
-
     alias td="tmux-on-directory"
+
+    functions --copy cd standard_cd
+
+    function cd
+      standard_cd $argv; and ls
+    end
 
     set -g fish_key_bindings fish_vi_key_bindings
 
