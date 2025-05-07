@@ -3,23 +3,6 @@ require("mason-lspconfig").setup{
   automatic_installation = true
 }
 
-local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-end
-
-require("mason-lspconfig").setup_handlers {
-  function(server_name)
-    require("lspconfig")[server_name].setup {
-      on_attach = on_attach,
-    }
-  end,
-  ["rust_analyzer"] = function ()
-    require("rust-tools").setup {
-    }
-  end,
-}
-
 -- Mappings.
 -- See `:help vim.lsp.*` for documentation on any of the below functions
 local bufopts = { noremap=true }
