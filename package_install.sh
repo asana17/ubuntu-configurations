@@ -72,6 +72,27 @@ nvim_install() {
   sudo update-alternatives --install /usr/bin/editor editor $nvim_bin_path 100
   sudo update-alternatives --install /usr/bin/vi vi $nvim_bin_path 100
   sudo update-alternatives --install /usr/bin/vim vim $nvim_bin_path 100
+
+  mkdir -p ${HOME}/.config/nvim
+  cp -r ${SCRIPT_DIR}/nvim ${HOME}/.config/
+  if command -v nvim &> /dev/null; then
+    nvim +:MasonUpdate +:qall
+  fi
+}
+
+fzf_install() {
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  if ! echo y y y | ~/.fzf/install; then
+    error "fzf" "Failed to install fzf"
+  fi
+}
+
+nerdfont_install(){
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip
+  mkdir -p ~/.local/share/fonts
+  unzip FiraCode.zip -d ~/.local/share/fonts
+  rm FiraCode.zip
+  fc-cache -fv
 }
 
 node_install() {
@@ -88,8 +109,27 @@ tilix_install() {
   fi
 }
 
+terminal_padding() {
+  mkdir -p ${HOME}/.config/gtk-3.0
+  echo \
+    "VteTerminal,\n\
+TerminalScreen,\n\
+vte-terminal {\n\
+  padding: 40px 40px 30px 30px;\n\
+  -VteTerminal-inner-border: 20px 20px 20px 20px;\n\
+}" \
+  >> ${HOME}/.config/gtk-3.0/gtk.css
+}
+
+tmux_install() {
+  pkg_install tmux
+  cp ${SCRIPT_DIR}/.tmux.conf ${HOME}/.tmux.conf
+}
+
 zsh_install() {
   pkg_install zsh
+  cp ${SCRIPT_DIR}/.zshrc ${HOME}/.zshrc
+  cp ${SCRIPT_DIR}/.p10k.zsh ${HOME}/.p10k.zsh
   zsh -c "source ~/.zshrc; exit"
   sudo sed s/required/sufficient/g -i /etc/pam.d/chsh
   chsh -s $(which zsh)
@@ -119,6 +159,7 @@ if ! TEMP=$(
 fi
 
 eval set -- "$TEMP"
+
 unset TEMP
 
 while true; do
@@ -155,7 +196,7 @@ done
 sudo apt-get update
 
 pkg_install curl git ripgrep tar unzip wget trash-cli \
-clangd tmux fontconfig
+clangd fontconfig
 
 
 if [ $EXTRA_INSTALL -eq 1 ]; then
@@ -164,15 +205,19 @@ if [ $EXTRA_INSTALL -eq 1 ]; then
   ctag_install
 fi
 
+tmux_install
 node_install
 nvim_install
 bat_install
 fd_install
+fzf_install
+nerdfont_install
 zsh_install
 
 if [ $GUI_INSTALL -eq 1 ]; then
   chrome_install
   tilix_install
+  terminal_padding
   nemo_install
 fi
 
