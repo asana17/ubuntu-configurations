@@ -37,6 +37,16 @@ fd_install() {
   sudo ln -s $(which fdfind) /usr/bin/fd
 }
 
+i3_install() {
+  pkg_install i3 i3lock i3blocks fcitx fcitx-mozc feh scrot arandr wmctrl xdotool
+  mkdir -p ${HOME}/.config/i3
+  cp ${SCRIPT_DIR}/i3/* ${HOME}/.config/i3/
+  echo "export DefaultImModule=fcitx" >> ${HOME}/.profile
+  echo "export GTK_IM_MODULE=fcitx" >> ${HOME}/.profile
+  echo "export QT_IM_MODULE=fcitx" >> ${HOME}/.profile
+  echo "export XMODIFIERS=\"@im=fcitx\"" >> ${HOME}/.profile
+}
+
 nemo_install() {
   non_interactive_pkg_install nemo
   if command -v nemo &> /dev/null; then
@@ -165,6 +175,7 @@ zsh_install() {
 
 EXTRA_INSTALL=0
 GUI_INSTALL=0
+I3_INSTALL=0
 NVIM_COMPATIBLE=0
 USE_ZSH=0
 
@@ -174,13 +185,13 @@ usage() {
   echo "  -h, --help        Show this help message"
   echo "  --extra           Install extra packages"
   echo "  --gui             Install GUI packages"
+  echo "  --i3              Install i3"
   echo "  --nvim-compatible Install nvim compatible version"
   echo "  --zsh             Use zsh as default shell"
 }
-
 if ! TEMP=$(
   getopt --options "h" \
-    --longoptions "extra,help,gui,nvim-compatible,zsh" \
+    --longoptions "extra,help,gui,i3,nvim-compatible,zsh" \
     -- "$@"
   ); then
   usage
@@ -203,6 +214,10 @@ while true; do
       ;;
     --gui)
       GUI_INSTALL=1
+      shift
+      ;;
+    --i3)
+      I3_INSTALL=1
       shift
       ;;
     --nvim-compatible)
@@ -245,6 +260,10 @@ bat_install
 fd_install
 fzf_install
 nerdfont_install
+
+if [ $I3_INSTALL -eq 1 ]; then
+  i3_install
+fi
 
 if [ $USE_ZSH -eq 1 ]; then
   zsh_install
