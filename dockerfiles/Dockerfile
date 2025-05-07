@@ -14,9 +14,9 @@ RUN apt-get update && \
     apt-get install -y sudo locales && \
     locale-gen ja_JP.UTF-8
 
-ENV LANG ja_JP.UTF-8
-ENV LANGUAGE ja_JP:ja
-ENV LC_ALL ja_JP.UTF-8
+ENV LANG=ja_JP.UTF-8
+ENV LANGUAGE=ja_JP:ja
+ENV LC_ALL=ja_JP.UTF-8
 ENV TZ=Asia/Tokyo
 
 ARG USER_HOME="/home/$USER"
@@ -25,7 +25,7 @@ RUN mkdir -p $USER_HOME && \
     echo "$USER ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER $USER
-ENV HOME $USER_HOME
+ENV HOME=$USER_HOME
 
 WORKDIR $HOME
 
