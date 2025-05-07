@@ -38,7 +38,7 @@ ${IMAGE}: .${IMAGE}
 ${CONTAINER}: .${CONTAINER}
 
 docker-exec: .${CONTAINER}
-	docker exec -it ${CONTAINER} /usr/bin/zsh
+	docker exec -it ${CONTAINER} /usr/bin/fish
 
 clean:
 	docker rm -f ${CONTAINER}

@@ -1,0 +1,14 @@
+[git_status]
+disabled = false
+format = '([$all_status$ahead_behind]($style) )'
+style = "green"
+stashed = ' \$${count}'
+ahead = " ⇡${count}"
+behind = " ⇣${count}"
+diverged = " ⇕${count}"
+conflicted = " =${count}"
+deleted = " ✘ ${count}"
+renamed = " »${count}"
+modified = " !${count}"
+staged = " +${count}"
+untracked = " ?${count}"

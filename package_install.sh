@@ -126,6 +126,33 @@ tmux_install() {
   cp ${SCRIPT_DIR}/.tmux.conf ${HOME}/.tmux.conf
 }
 
+fisher_install() {
+  curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+
+  fisher update
+}
+
+fish_install() {
+  sudo add-apt-repository ppa:fish-shell/release-3
+  sudo apt-get update
+  pkg_install fish
+
+  mkdir -p ~/.config/fish
+  cp ${SCRIPT_DIR}/fish/* ~/.config/fish/
+
+  fisher_install
+  fish -c "source ~/.config/fish/config.fish; exit"
+  sudo sed s/required/sufficient/g -i /etc/pam.d/chsh
+  chsh -s $(which fish)
+  sudo sed s/sufficient/required/g -i /etc/pam.d/chsh
+}
+
+
+starship_install() {
+  curl -sS https://starship.rs/install.sh | sh -s -- -y > /dev/null 2>&1 || true
+  cp ${SCRIPT_DIR}/starship.toml ${HOME}/.config/starship.toml
+}
+
 zsh_install() {
   pkg_install zsh
   cp ${SCRIPT_DIR}/.zshrc ${HOME}/.zshrc
@@ -139,6 +166,7 @@ zsh_install() {
 EXTRA_INSTALL=0
 GUI_INSTALL=0
 NVIM_COMPATIBLE=0
+USE_ZSH=0
 
 usage() {
   echo "Usage: $0 [options]"
@@ -146,12 +174,13 @@ usage() {
   echo "  -h, --help        Show this help message"
   echo "  --extra           Install extra packages"
   echo "  --gui             Install GUI packages"
-  echo "  --nvim-compatible  Install nvim compatible version"
+  echo "  --nvim-compatible Install nvim compatible version"
+  echo "  --zsh             Use zsh as default shell"
 }
 
 if ! TEMP=$(
   getopt --options "h" \
-    --longoptions "extra,help,gui,nvim-compatible" \
+    --longoptions "extra,help,gui,nvim-compatible,zsh" \
     -- "$@"
   ); then
   usage
@@ -178,6 +207,10 @@ while true; do
       ;;
     --nvim-compatible)
       NVIM_COMPATIBLE=1
+      shift
+      ;;
+    --zsh)
+      USE_ZSH=1
       shift
       ;;
     --)
@@ -212,7 +245,13 @@ bat_install
 fd_install
 fzf_install
 nerdfont_install
-zsh_install
+
+if [ $USE_ZSH -eq 1 ]; then
+  zsh_install
+else
+  fish_install
+  starship_install
+fi
 
 if [ $GUI_INSTALL -eq 1 ]; then
   chrome_install
