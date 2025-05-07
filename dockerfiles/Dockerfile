@@ -34,9 +34,19 @@ RUN git clone https://www.github.com/asana17/ubuntu-configurations.git
 
 RUN ubuntu-configurations/ubuntu_configuration.sh
 
-RUN sed -i \
-    "0,/typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_{CONTENT,VISUAL_IDENTIFIER}_EXPANSION/s//  # &/" \
-    ~/.p10k.zsh && \
-    sed -i \
-    "0,/POWERLEVEL9K_CONTEXT_PREFIX.*/s//&\n  typeset -g POWERLEVEL9K_CONTEXT_SUFFIX=':🐳 ${DOCKER_CONTAINER_NAME}'/" \
-    ~/.p10k.zsh
+RUN cat >> ~/.config/fish/config.fish <<EOF
+if test -f /proc/self/cgroup && grep -q docker /proc/self/cgroup
+    set -l container_id (cat /proc/self/cgroup | grep docker | head -n 1 | cut -d "/" -f 3 | cut -d "-" -f 1)
+    if test -n "$container_id"
+        set -gx DOCKER_CONTAINER_NAME $container_id
+    end
+end
+EOF
+
+RUN cat >> ~/.config/starship.toml <<EOF
+[custom.docker]
+command = "echo -n \"🐳 \" && echo $DOCKER_CONTAINER_NAME"
+when = "test -n \"$DOCKER_CONTAINER_NAME\""
+format = "[:$output]($style) "
+style = "cyan bold"
+EOF
