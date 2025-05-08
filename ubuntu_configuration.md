@@ -187,3 +187,10 @@ fcitx-config-gtk3
 ```
 
 to add mozc to input method
+
+## sound
+
+```
+sudo apt install pavucontrol
+pavucontrol
+```
