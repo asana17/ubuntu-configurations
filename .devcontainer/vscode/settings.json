@@ -4,7 +4,7 @@
   "workbench.colorTheme": "Solarized Dark",
   "workbench.statusBar.visible": false,
   "workbench.editor.enablePreview": false,
-  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.defaultProfile.linux": "fish",
   "terminal.integrated.shellIntegration.enabled": true,
   "terminal.integrated.sendKeybindingsToShell": true,
   "window.zoomLevel": 1,
