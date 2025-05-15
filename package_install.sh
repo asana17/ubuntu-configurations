@@ -38,7 +38,7 @@ fd_install() {
 }
 
 i3_install() {
-  pkg_install i3 i3lock i3blocks fcitx fcitx-mozc feh scrot arandr wmctrl xdotool
+  pkg_install i3 i3lock i3blocks fcitx fcitx-mozc feh scrot arandr wmctrl xdotool picom pavucontrol
   mkdir -p ${HOME}/.config/i3
   cp ${SCRIPT_DIR}/i3/* ${HOME}/.config/i3/
   echo "export DefaultImModule=fcitx" >> ${HOME}/.profile
@@ -143,7 +143,7 @@ fisher_install() {
 fish_install() {
   sudo add-apt-repository ppa:fish-shell/release-3
   sudo apt-get update
-  pkg_install fish
+  non_interactive_pkg_install fish
 
   mkdir -p ~/.config/fish
   cp ${SCRIPT_DIR}/fish/* ~/.config/fish/

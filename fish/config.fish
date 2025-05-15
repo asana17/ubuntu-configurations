@@ -23,8 +23,7 @@ if status is-interactive
             return 1
         end
 
-        cd $abs_dir
-        tmux
+        fish -c "cd $abs_dir; tmux"
     end
     alias td="tmux-on-directory"
 

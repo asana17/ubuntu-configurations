@@ -189,17 +189,18 @@ bar {
 
 exec --no-startup-id fcitx
 
-exec --no-startup-id arandr ~/.screenlayout/config.sh
+exec --no-startup-id ~/.screenlayout/config.sh
 workspace 1 output primary
 
-exec --no-startup-id exec bash ~/.fehbg.sh
+exec --no-startup-id exec bash ~/.fehbg
 
 # for_window [class="Tilix"] move to scratchpad
 # bindsym F12 exec --no-startup-id ~/.config/i3/toggle_tilix_scratchpad.sh
 
 bindsym F12 exec tilix --quake
 
-bindsym F2 exec google-chrome-stable
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
+bindsym F2 exec google-chrome-stable --password-store=gnome-libsecret
 
 exec_always --no-startup-id picom --experimental-backends --config ~/.config/picom/picom.conf
 
